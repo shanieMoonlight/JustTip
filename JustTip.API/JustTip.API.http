@@ -1,4 +1,4 @@
-@JustTip.API_HostAddress = http://localhost:5239
+@JustTip.API_HostAddress = http://localhost:5287
 
 GET {{JustTip.API_HostAddress}}/weatherforecast/
 Accept: application/json

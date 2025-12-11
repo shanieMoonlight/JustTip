@@ -12,7 +12,10 @@ EXPOSE 8081
 FROM mcr.microsoft.com/dotnet/sdk:9.0 AS build
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
+COPY ["Directory.Packages.props", "."]
 COPY ["JustTip.API/JustTip.API.csproj", "JustTip.API/"]
+COPY ["JustTip.Application/JustTip.Application.csproj", "JustTip.Application/"]
+COPY ["Libs/LogToFile.csproj", "Libs/"]
 RUN dotnet restore "./JustTip.API/JustTip.API.csproj"
 COPY . .
 WORKDIR "/src/JustTip.API"

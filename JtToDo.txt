@@ -1,0 +1,8 @@
+Delete IShiftRepo
+
+    protected JtBaseDomainEntity()
+    {
+        Id = NewId.NextSequentialGuid();
+    }
+
+    AddEmptyHandlers

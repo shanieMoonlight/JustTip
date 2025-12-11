@@ -16,16 +16,20 @@ public class LoggingInstaller
     public WebApplicationBuilder Install(WebApplicationBuilder builder, JtStartupData startupData)
     {
 
-        var logging = builder.Logging; ;
+        var logging = builder.Logging;
         var env = builder.Environment;
 
         logging.ClearProviders();
 
-        logging.AddLogToFile(config =>
+        if (env.IsDevelopment())
         {
-            //config.AppName = startupData.GetAppName();
-            config.Company = "JustTip";
-        });
+            logging.AddConsole();
+            logging.AddLogToFile(config =>
+            {
+                config.AppName = startupData.GetAppName();
+                config.Company = "JustTip";
+            });
+        }
 
         return builder;
 

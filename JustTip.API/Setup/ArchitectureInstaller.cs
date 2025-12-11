@@ -1,4 +1,8 @@
-﻿namespace JustTip.API.Setup;
+﻿using JustTip.Application;
+using JustTip.Infrastructure;
+using JustTip.Presentation;
+
+namespace JustTip.API.Setup;
 /// <summary>
 /// Install Architecture stuff
 /// </summary>
@@ -14,10 +18,10 @@ public class ArchitectureInstaller
 
         //Console.WriteLine($"ArchitectureInstaller: Connection-String: {startupData.ConnectionStringsSection.GetPgDb()}");
 
-        //builder.Services
-        //    .AddGbApplication()
-        //    .AddGbInfrastructure(startupData.ConnectionStringsSection.GetPgDb())
-        //    .AddPresentation();
+        builder.Services
+            .AddJtApplication()
+            .AddJtInfrastructure(startupData.ConnectionStringsSection.GetPgDb())
+            .AddPresentation();
 
         return builder;
 

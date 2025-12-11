@@ -18,7 +18,7 @@ public class JtExceptionConverter : IExceptionConverter
 
         return exception switch
         {
-            //SomeGbException gbEx => new ExceptionDetails(
+            //SomeJtException gbEx => new ExceptionDetails(
             //    StatusCodes.Status400BadRequest,
             //    BadRequestResponse.Create(ipe.Property, ipe.Message)),
 

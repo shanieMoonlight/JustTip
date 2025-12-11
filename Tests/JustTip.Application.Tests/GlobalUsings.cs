@@ -1,0 +1,12 @@
+global using JustTip.Application.Domain.Entities.Employees;
+global using JustTip.Application.Features.Employees;
+global using JustTip.Application.Features.Employees.Cmd.Create;
+global using JustTip.Application.Utility.Results;
+global using JustTip.Application.Utility;
+global using Moq;
+global using Shouldly;
+global using JustTip.Application.Domain.Entities;
+global using JustTip.Application.Jobs.OutboxMsgs;
+global using Microsoft.Extensions.Logging;
+global using Jt.Application.Utility.Results;
+global using JustTip.Application.Features.Employees.Cmd;

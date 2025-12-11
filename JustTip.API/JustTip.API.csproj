@@ -4,26 +4,35 @@
 		<TargetFramework>net9.0</TargetFramework>
 		<Nullable>enable</Nullable>
 		<ImplicitUsings>enable</ImplicitUsings>
-		<UserSecretsId>378f9714-3af9-4fa9-bb1a-ca39b5c82837</UserSecretsId>
 		<DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
 	</PropertyGroup>
 
 	<ItemGroup>
 		<PackageReference Include="Microsoft.AspNetCore.OpenApi" />
 		<PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" />
+		<PackageReference Include="StronglyTypedAppSettings" />
+		<PackageReference Include="Scalar.AspNetCore" />
 		<PackageReference Include="Microsoft.EntityFrameworkCore.Tools">
 			<PrivateAssets>all</PrivateAssets>
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 		</PackageReference>
 		<PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" />
-		<PackageReference Include="Scalar.AspNetCore" />
-		<PackageReference Include="StronglyTypedAppSettings" />
-
 	</ItemGroup>
+
+
 
 	<ItemGroup>
-	  <ProjectReference Include="..\JustTip.Application\JustTip.Application.csproj" />
-	  <ProjectReference Include="..\Libs\LogToFile.csproj" />
+		<AdditionalFiles Include="appsettings.json" />
 	</ItemGroup>
+
+
+
+	<ItemGroup>
+		<ProjectReference Include="..\JustTip.Application\JustTip.Application.csproj" />
+		<ProjectReference Include="..\JustTip.Infrastructure\JustTip.Infrastructure.csproj" />
+		<ProjectReference Include="..\JustTip.Presentation\JustTip.Presentation.csproj" />
+		<ProjectReference Include="..\Libs\LogToFile\LogToFile.csproj" />
+	</ItemGroup>
+
 
 </Project>

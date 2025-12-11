@@ -1,8 +1,10 @@
-
-
 //--------------------------- Variables ---------------------------//
 
+using JustTip.API.Middleware.Exceptions;
 using JustTip.API.Setup;
+using JustTip.Application;
+using JustTip.Infrastructure;
+using Scalar.AspNetCore;
 
 var _builder = WebApplication.CreateBuilder(args);
 var _services = _builder.Services;
@@ -34,10 +36,21 @@ _builder.Services.AddOpenApi();
 
 var app = _builder.Build();
 
+
+app.UseCustomExceptionHandler(new JtExceptionConverter());
+
+
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
     app.MapOpenApi();
+    app.MapScalarApiReference(_startupData.ScalarSection.GetEndPointPrefix(), opts =>
+    {
+        opts
+        .WithTitle(_startupData.ScalarSection.GetTitle())
+        .WithTheme(ScalarTheme.Solarized)
+        .WithDefaultHttpClient(ScalarTarget.Node, ScalarClient.HttpClient);
+    });
 }
 
 app.UseHttpsRedirection();
@@ -45,5 +58,10 @@ app.UseHttpsRedirection();
 app.UseAuthorization();
 
 app.MapControllers();
+
+
+
+await app.UseJtApplicationAsync();
+app.UseJtInfrastructure("jt-job-dashboard");
 
 app.Run();
