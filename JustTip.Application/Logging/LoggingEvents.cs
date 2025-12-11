@@ -13,5 +13,13 @@ public class JtLoggingEvents
 
 
 
+    public static class EventHandling
+    {
+        public static readonly int EMPLOYEES = 1000;
+        public static readonly int SHIFTS = EMPLOYEES + 1;
+    }
+
+
+
 
 }//Cls

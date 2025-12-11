@@ -3,7 +3,7 @@
 namespace JustTip.Application.Domain.Entities.Employees;
 
 /// <summary>
-/// Interface for Grid Repository
+/// Interface for Employee Repository
 /// </summary>
 public interface IEmployeeRepo : IGenCrudRepo<Employee>
 {

@@ -1,4 +1,6 @@
-﻿namespace JustTip.Testing.Utils.Logging;
+﻿using Microsoft.Extensions.Logging;
+
+namespace JustTip.Testing.Utils.Logging;
 public static class LoggingUtils{
     public static void VerifyExceptionLogging<TClass>(
         this Mock<ILogger<TClass>> _mockLogger,

@@ -10,3 +10,8 @@ global using JustTip.Application.Jobs.OutboxMsgs;
 global using Microsoft.Extensions.Logging;
 global using Jt.Application.Utility.Results;
 global using JustTip.Application.Features.Employees.Cmd;
+global using JustTip.Application.Domain.Entities.Employees.Events;
+global using JustTip.Application.Events.Employees;
+global using JustTip.Testing.Utils.Logging;
+global using JustTip.Application.Logging;
+global using JustTip.Testing.Utils.DataFactories;

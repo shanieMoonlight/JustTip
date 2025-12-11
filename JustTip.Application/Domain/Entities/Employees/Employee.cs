@@ -12,7 +12,7 @@ public class Employee : JtBaseDomainEntity
 
     //Navigation properties
     /// <summary>
-    /// Shifts that belong to this Grid
+    /// Shifts that belong to this Employee
     /// </summary>
     public List<Shift> Shifts { get; private set; } = [];
 
@@ -83,8 +83,8 @@ public class Employee : JtBaseDomainEntity
 
         Shifts.Remove(existing);
         // OPTIONAL: if you want to detach the relationship for EF state tracking:
-        // existing.Grid = null;
-        // existing.GridId = Guid.Empty;    
+        // existing.Employee = null;
+        // existing.EmployeeId = Guid.Empty;    
 
         RaiseDomainEvent(new ShiftRemovedDomainEvent(Id, existing.Id));
         return this;
