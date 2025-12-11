@@ -55,19 +55,29 @@ public class Employee : JtBaseDomainEntity
 
     //- - - - - - - - - - - - - // 
 
-    public Employee AddShift(Shift shift)
+    public Shift AddShift(
+        DateTime date,
+        DateTime startTimeUtc,
+        DateTime endTimeUtc)
     {
+        var shift = Shift.Create(this, date, startTimeUtc, endTimeUtc);
         Shifts.Add(shift);
         RaiseDomainEvent(new ShiftAddedDomainEvent(Id, shift.Id));
-        return this;
+        return shift;
     }
-
 
     //- - - - - - - - - - - - - // 
 
-    public Employee RemoveShift(Shift gridShift)
+
+    public Employee RemoveShift(Shift shift) => RemoveShift(shift.Id);
+
+    //- - - - - - - - - - - - - // 
+
+
+    public Employee RemoveShift(Guid shiftId)
     {
-        var existing = Shifts.FirstOrDefault(n => n.Id == gridShift.Id);
+        var existing = Shifts.FirstOrDefault(n => n.Id == shiftId);
+        //Already deleted or not found
         if (existing is null)
             return this;
 
@@ -79,6 +89,8 @@ public class Employee : JtBaseDomainEntity
         RaiseDomainEvent(new ShiftRemovedDomainEvent(Id, existing.Id));
         return this;
     }
+
+
 
 
 }//Cls

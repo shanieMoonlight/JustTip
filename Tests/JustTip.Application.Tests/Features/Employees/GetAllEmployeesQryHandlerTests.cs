@@ -36,7 +36,7 @@ public class GetAllEmployeesQryHandlerTests
 
         // Assert
         result.ShouldBeOfType<GenResult<IEnumerable<EmployeeDto>>>();
-        result.Value.Count().ShouldBe(mdls.Count);
+        result.Value?.Count().ShouldBe(mdls.Count);
     }
 
     //--------------------------// 

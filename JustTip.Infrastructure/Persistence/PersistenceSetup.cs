@@ -1,4 +1,5 @@
-﻿using JustTip.Infrastructure.Persistence.Interceptors;
+﻿using EfHelpers.Interceptors;
+using JustTip.Infrastructure.Persistence.Interceptors;
 using JustTip.Infrastructure.Persistence.Repos.Setup;
 using JustTip.Infrastructure.Persistence.Utils;
 using Microsoft.EntityFrameworkCore;
@@ -17,12 +18,16 @@ internal static class PersistenceSetup
         this IServiceCollection services, string connectionString)
     {
         services.AddSingleton<DomainEventsToOutboxMsgInterceptor>();
+        services.AddSingleton<DateTimeNormalizationSaveChangesInterceptor>();
 
         services.AddDbContext<JtDbContext>((sp, config) =>
         {
             var domainEventToOutboxMsgInterceptor = sp.GetService<DomainEventsToOutboxMsgInterceptor>();
+            var dateTimeNormalizationSaveChangesInterceptor = sp.GetService<DateTimeNormalizationSaveChangesInterceptor>();
 
-            List<IInterceptor> interceptors = [domainEventToOutboxMsgInterceptor!];
+            List<IInterceptor> interceptors = [
+                domainEventToOutboxMsgInterceptor!,
+                    dateTimeNormalizationSaveChangesInterceptor!];
 
             // resolve host environment from the service provider
             var env = sp.GetService<IHostEnvironment>();

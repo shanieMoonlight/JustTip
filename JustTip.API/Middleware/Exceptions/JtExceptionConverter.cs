@@ -1,4 +1,7 @@
-﻿namespace JustTip.API.Middleware.Exceptions;
+﻿using JustTip.Application.Utility.ErrorHandling;
+using JustTip.Application.Utility.Exceptions;
+
+namespace JustTip.API.Middleware.Exceptions;
 
 //########################################//
 
@@ -18,9 +21,9 @@ public class JtExceptionConverter : IExceptionConverter
 
         return exception switch
         {
-            //SomeJtException gbEx => new ExceptionDetails(
-            //    StatusCodes.Status400BadRequest,
-            //    BadRequestResponse.Create(ipe.Property, ipe.Message)),
+            InvalidDomainDataException idde => new ExceptionDetails(
+                StatusCodes.Status400BadRequest,
+                BadRequestResponse.Create(idde.Entity, idde.Message)),
 
             _ => new ExceptionDetails(
                 StatusCodes.Status500InternalServerError,

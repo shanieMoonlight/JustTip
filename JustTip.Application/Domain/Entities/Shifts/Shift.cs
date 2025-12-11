@@ -22,7 +22,7 @@ public class Shift : JtBaseDomainEntity
     #endregion
 
 
-    public Shift(
+    private Shift(
         Employee employee,
         DateTime date,
         DateTime startTimeUtc,
@@ -30,7 +30,7 @@ public class Shift : JtBaseDomainEntity
     {
         EmployeeId = employee.Id;
         Employee = employee;
-        Date = date;
+        Date = date.Date;
 
         DateTime startDateTimeUtc = date.Date + startTimeUtc.TimeOfDay;
         StartTimeUtc = startDateTimeUtc;
@@ -42,13 +42,14 @@ public class Shift : JtBaseDomainEntity
     //--------------------------// 
 
 
-    public static Shift Create(
+    internal static Shift Create(
         Employee employee,
         DateTime date,
         DateTime startTimeUtc,
         DateTime endTimeUtc)
     {
         ValidateShiftTimes(startTimeUtc, endTimeUtc);
+        ValidateDate(date);
 
         return new(
             employee,
@@ -61,10 +62,15 @@ public class Shift : JtBaseDomainEntity
 
     //- - - - - - - - - - - - - // 
 
-    public Shift Update(DateTime startTimeUtc, DateTime endTimeUtc)
+    public Shift Update(
+        DateTime date,
+        DateTime startTimeUtc,
+        DateTime endTimeUtc)
     {
         ValidateShiftTimes(startTimeUtc, endTimeUtc);
+        ValidateDate(date);
 
+        Date = date;
         StartTimeUtc = startTimeUtc;
         EndTimeUtc = endTimeUtc;
         RaiseDomainEvent(new ShiftUpdatedDomainEvent(Id));
@@ -76,7 +82,14 @@ public class Shift : JtBaseDomainEntity
     private static void ValidateShiftTimes(DateTime startTimeUtc, DateTime endTimeUtc)
     {
         if (startTimeUtc >= endTimeUtc)
-            throw new InvalidDomainDataException("Start time must be earlier than end time.");
+            throw new InvalidDomainDataException(nameof(Shift), "Start time must be earlier than end time.");
+    }
+
+
+    private static void ValidateDate(DateTime date)
+    {
+        if (date < DateTime.Now)
+            throw new InvalidDomainDataException(nameof(Shift), "Date must be in the future.");
     }
 
 
