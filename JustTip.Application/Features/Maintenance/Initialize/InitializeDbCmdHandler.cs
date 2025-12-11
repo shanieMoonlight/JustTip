@@ -1,5 +1,5 @@
 using JustTip.Application.Abstractions;
-using JustTip.Application.Features.Employees.Cmd;
+using JustTip.Application.Features.Employees;
 
 namespace JustTip.Application.Features.Maintenance.Initialize;
 public class InitializeDbCmdHandler(IDbInitializer _dbInitializer) : IJtCommandHandler_NonUow<InitializeDbCmd, List<EmployeeDto>>

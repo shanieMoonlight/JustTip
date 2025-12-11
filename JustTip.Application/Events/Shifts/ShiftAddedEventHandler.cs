@@ -26,7 +26,7 @@ public class ShiftAddedEventHandler(IJtUnitOfWork uow, ILogger<ShiftAddedEventHa
                     JtLoggingEvents.EventHandling.SHIFTS,
                     "{event} Failure.{info}",
                     nameof(ShiftAddedDomainEvent),
-                    JtMsgs.Error.NotFound<Employee>(employeeId));
+                    JustTipMsgs.Error.NotFound<Employee>(employeeId));
                 return;
             }
 
@@ -37,7 +37,7 @@ public class ShiftAddedEventHandler(IJtUnitOfWork uow, ILogger<ShiftAddedEventHa
                     JtLoggingEvents.EventHandling.SHIFTS,
                     "{event} Failure.{info}",
                     nameof(ShiftAddedDomainEvent),
-                    JtMsgs.Error.NotFound<Shift>(shiftId));
+                    JustTipMsgs.Error.NotFound<Shift>(shiftId));
                 return;
             }
 

@@ -7,7 +7,7 @@ internal class GetJtOutboxMessageByIdQryHandler(IJtOutboxMessageRepo repo) : IJt
         var id = request.Id;
         var mdl = await repo.FirstOrDefaultByIdAsync(id);
         if (mdl is null)
-            return GenResult<JtOutboxMessageDto>.NotFoundResult(JtMsgs.Error.NotFound<JtOutboxMessage>(id));
+            return GenResult<JtOutboxMessageDto>.NotFoundResult(JustTipMsgs.Error.NotFound<JtOutboxMessage>(id));
 
         return GenResult<JtOutboxMessageDto>.Success(mdl.ToDto());
 

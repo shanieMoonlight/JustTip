@@ -1,11 +1,11 @@
 ﻿using JustTip.Application.Domain.Abstractions.Repos.Transactions;
-using JustTip.Application.Domain.Entities.Employees;
-using JustTip.Application.Domain.Entities.OutboxMessages;
+using JustTip.Application.Domain.Entities.Tips;
 
 namespace JustTip.Application.Domain.Entities;
 public interface IJtUnitOfWork : IDisposable
 {
     IEmployeeRepo EmployeeRepo { get; }
+    ITipRepo TipRepo { get; }
     IJtOutboxMessageRepo OutboxMessageRepo { get; }
 
     //--------------------------// 

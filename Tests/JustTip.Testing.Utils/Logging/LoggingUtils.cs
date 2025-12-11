@@ -74,7 +74,9 @@ public static class LoggingUtils{
             times ?? Times.Once);
     }
 
+
     //- - - - - - - - - - - - //
+
 
     public static void VerifyExceptionLogging<TClass>(
         this Mock<ILogger<TClass>> _mockLogger,
@@ -91,7 +93,9 @@ public static class LoggingUtils{
             times ?? Times.Once);
     }
 
+
     //------------------------//
+
 
     public static void VerifyErrorLogging<TClass>(
         this Mock<ILogger<TClass>> mockLogger,
@@ -105,7 +109,9 @@ public static class LoggingUtils{
                 It.IsAny<Func<It.IsAnyType, Exception?, string>>()),
             times ?? Times.Once);
 
+
     //- - - - - - - - - - - - //
+
 
     public static void VerifyErrorLogging<TClass>(
         this Mock<ILogger<TClass>> mockLogger,
@@ -120,7 +126,9 @@ public static class LoggingUtils{
                 It.IsAny<Func<It.IsAnyType, Exception?, string>>()),
             times ?? Times.Once);
 
+
     //- - - - - - - - - - - - //
+
 
     public static void VerifyErrorLogging<TClass>(
         this Mock<ILogger<TClass>> mockLogger,
@@ -136,7 +144,9 @@ public static class LoggingUtils{
                 It.IsAny<Func<It.IsAnyType, Exception?, string>>()),
             times ?? Times.Once);
 
+
     //- - - - - - - - - - - - //
+
 
     public static void VerifyErrorLogging<TClass>(
         this Mock<ILogger<TClass>> mockLogger,
@@ -170,6 +180,7 @@ public static class LoggingUtils{
                 It.IsAny<Func<It.IsAnyType, Exception?, string>>()),
             times ?? Times.Once);
     }
+
 
     //------------------------//
 

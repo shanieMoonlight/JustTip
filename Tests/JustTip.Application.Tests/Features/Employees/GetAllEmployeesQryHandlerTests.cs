@@ -61,6 +61,5 @@ public class GetAllEmployeesQryHandlerTests
         result.Value.ShouldBeEmpty();
     }
 
-    //--------------------------// 
 
 }//Cls

@@ -135,6 +135,34 @@ namespace JustTip.Infrastructure.Migrations
                     b.ToTable("shifts", "Jt");
                 });
 
+            modelBuilder.Entity("JustTip.Application.Domain.Entities.Tips.Tip", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .HasColumnType("uuid")
+                        .HasColumnName("id");
+
+                    b.Property<decimal>("AmountEuros")
+                        .HasColumnType("numeric")
+                        .HasColumnName("amount_euros");
+
+                    b.Property<DateTime?>("CreatedDate")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("created_date");
+
+                    b.Property<DateTime>("DateTime")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("date_time");
+
+                    b.Property<DateTime?>("LastModifiedDate")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("last_modified_date");
+
+                    b.HasKey("Id")
+                        .HasName("pk_tips");
+
+                    b.ToTable("tips", "Jt");
+                });
+
             modelBuilder.Entity("JustTip.Application.Domain.Entities.Shifts.Shift", b =>
                 {
                     b.HasOne("JustTip.Application.Domain.Entities.Employees.Employee", "Employee")

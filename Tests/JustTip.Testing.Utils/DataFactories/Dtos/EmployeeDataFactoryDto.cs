@@ -1,3 +1,5 @@
+using JustTip.Application.Features.Employees;
+
 namespace JustTip.Testing.Utils.DataFactories.Dtos;
 
 public static class EmployeeDtoDataFactory

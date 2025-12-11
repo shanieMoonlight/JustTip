@@ -1,4 +1,4 @@
-﻿namespace JustTip.Application.Features.Employees.Cmd;
+﻿namespace JustTip.Application.Features.Employees;
 internal static class EmployeeExtensions
 {
     public static Employee Update(this Employee model, EmployeeDto dto) =>

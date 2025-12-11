@@ -34,7 +34,7 @@ public class AddShiftToEmployeeCmdHandlerTests
         result.ShouldBeOfType<GenResult<ShiftDto>>();
         result.Succeeded.ShouldBeFalse();
         result.Status.ShouldBe(ResultStatus.NotFound);
-        result.Info.ShouldBe(JtMsgs.Error.NotFound<Employee>(requestDto.EmployeeId));
+        result.Info.ShouldBe(JustTipMsgs.Error.NotFound<Employee>(requestDto.EmployeeId));
     }
 
     //--------------------------// 

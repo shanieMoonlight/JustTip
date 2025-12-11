@@ -20,7 +20,7 @@ public class UpdateEmployeeCmdValidatorTests
         // Assert
         result.IsValid.ShouldBeFalse();
         result.Errors.Count.ShouldBe(1);
-        result.Errors.First().ErrorMessage.ShouldBe(JtMsgs.Error.IsRequired(nameof(UpdateEmployeeCmd.Dto)));
+        result.Errors.First().ErrorMessage.ShouldBe(JustTipMsgs.Error.IsRequired(nameof(UpdateEmployeeCmd.Dto)));
     }
 
     //--------------------------// 

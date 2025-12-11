@@ -20,7 +20,7 @@ public class RemoveShiftFromEmployeeCmdValidatorTests
         // Assert
         result.IsValid.ShouldBeFalse();
         result.Errors.Count.ShouldBe(1);
-        result.Errors.First().ErrorMessage.ShouldBe(JtMsgs.Error.IsRequired(nameof(RemoveShiftFromEmployeeCmd.Dto)));
+        result.Errors.First().ErrorMessage.ShouldBe(JustTipMsgs.Error.IsRequired(nameof(RemoveShiftFromEmployeeCmd.Dto)));
     }
 
     //--------------------------// 

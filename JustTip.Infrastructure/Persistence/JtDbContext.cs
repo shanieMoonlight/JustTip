@@ -2,6 +2,7 @@
 using JustTip.Application.Domain.Entities.Employees;
 using JustTip.Application.Domain.Entities.OutboxMessages;
 using JustTip.Application.Domain.Entities.Shifts;
+using JustTip.Application.Domain.Entities.Tips;
 using JustTip.Infrastructure.Persistence.Utils;
 using Microsoft.EntityFrameworkCore;
 
@@ -15,6 +16,7 @@ public class JtDbContext(DbContextOptions<JtDbContext> options) : DbContext(opti
 
     //TODO: maybe hide these behind Grid?
     public DbSet<Shift> Shifts => Set<Shift>();
+    public DbSet<Tip> Tips => Set<Tip>();
 
     public DbSet<JtOutboxMessage> OutboxMessages => Set<JtOutboxMessage>();
 

@@ -1,7 +1,7 @@
 ﻿using JustTip.Application.Domain.Entities.OutboxMessages;
 
 namespace JustTip.Application.Utility;
-public class JtMsgs
+public class JustTipMsgs
 {
     static readonly string _nl = Environment.NewLine;
 
@@ -10,12 +10,11 @@ public class JtMsgs
     internal static class Info
     {
 
-        public static readonly string ORDER_COMPLETE = $"Your complete has been place in our system.{_nl}You will receive a Confirmation Email Shortly.{_nl} Check your spam folder if you don't see it.";
         public static readonly string ALREADY_ENTERED = $"Your complete has already been entered.";
         public static string Deleted<T>(Guid id) => $"{typeof(T).Name}, '{id}' was deleted.";
 
 
-    }
+    }//Info
 
     //#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#//
 

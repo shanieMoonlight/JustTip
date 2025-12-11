@@ -8,7 +8,7 @@ public class DeleteEmployeeCmdValidator : AbstractValidator<DeleteEmployeeCmd>
     {
         RuleFor(p => p.Id)
         .NotEmpty()
-                .WithMessage(JtMsgs.Error.IsRequired("{PropertyName}"));
+                .WithMessage(JustTipMsgs.Error.IsRequired("{PropertyName}"));
 
     }
 }//Cls

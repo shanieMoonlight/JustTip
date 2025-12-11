@@ -25,7 +25,7 @@ public class NewEmployeeEventHandler(IJtUnitOfWork uow, ILogger<NewEmployeeEvent
                     JtLoggingEvents.EventHandling.EMPLOYEES,
                     "{event} Failure.{info}",
                     nameof(EmployeeCreatedDomainEvent),
-                    JtMsgs.Error.NotFound<Employee>(employeeId));
+                    JustTipMsgs.Error.NotFound<Employee>(employeeId));
                 return;
             }
 

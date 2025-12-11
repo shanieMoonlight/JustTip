@@ -6,11 +6,11 @@ public class UpdateEmployeeCmdHandler(IEmployeeRepo _repo ) : IJtCommandHandler<
         var dto = request.Dto;
 
         if (dto == null)
-            return GenResult<EmployeeDto>.BadRequestResult(JtMsgs.Error.NO_DATA_SUPPLIED);
+            return GenResult<EmployeeDto>.BadRequestResult(JustTipMsgs.Error.NO_DATA_SUPPLIED);
 
         var mdl = await _repo.FirstOrDefaultByIdAsync(dto.Id);
         if (mdl == null)
-            return GenResult<EmployeeDto>.NotFoundResult(JtMsgs.Error.NotFound<Employee>(dto.Id));
+            return GenResult<EmployeeDto>.NotFoundResult(JustTipMsgs.Error.NotFound<Employee>(dto.Id));
 
         mdl.Update(dto);
 

@@ -68,7 +68,7 @@ public class GetEmployeeByIdQryHandlerTests
         result.ShouldBeOfType<GenResult<EmployeeDto>>();
         result.Succeeded.ShouldBeFalse();
         result.NotFound.ShouldBeTrue();
-        result.Info.ShouldBe(JtMsgs.Error.NotFound<Employee>(employeeId));
+        result.Info.ShouldBe(JustTipMsgs.Error.NotFound<Employee>(employeeId));
     }
 
     //--------------------------// 

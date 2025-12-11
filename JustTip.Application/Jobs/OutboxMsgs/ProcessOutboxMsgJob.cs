@@ -60,7 +60,7 @@ public class ProcessOutboxMsgJob(IJtUnitOfWork uow, IPublisher publisher, ILogge
 
             if (domainEv == null)
             {
-                logger.LogError(JtLoggingEvents.JOBS.OUTBOX_PROCESSING, "{msg}", JtMsgs.Error.Jobs.MISSING_OUTBOX_CONTENT(msg));
+                logger.LogError(JtLoggingEvents.JOBS.OUTBOX_PROCESSING, "{msg}", JustTipMsgs.Error.Jobs.MISSING_OUTBOX_CONTENT(msg));
                 return;
             }
 

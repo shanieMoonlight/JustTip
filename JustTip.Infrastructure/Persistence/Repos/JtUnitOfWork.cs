@@ -2,6 +2,7 @@
 using JustTip.Application.Domain.Entities;
 using JustTip.Application.Domain.Entities.Employees;
 using JustTip.Application.Domain.Entities.OutboxMessages;
+using JustTip.Application.Domain.Entities.Tips;
 using JustTip.Infrastructure.Persistence.Transactions;
 
 namespace JustTip.Infrastructure.Persistence.Repos;
@@ -9,7 +10,8 @@ namespace JustTip.Infrastructure.Persistence.Repos;
 internal class JtUnitOfWork(
     JtDbContext db,
     IEmployeeRepo employeeRepo,
-     IJtOutboxMessageRepo outboxMessageRepo)
+    ITipRepo tipRepo,
+    IJtOutboxMessageRepo outboxMessageRepo)
     : IJtUnitOfWork
 {
 
@@ -17,6 +19,7 @@ internal class JtUnitOfWork(
 
     public IEmployeeRepo EmployeeRepo => employeeRepo;
     public IJtOutboxMessageRepo OutboxMessageRepo => outboxMessageRepo;
+    public ITipRepo TipRepo => tipRepo;
 
     //----------------------//
 

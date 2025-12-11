@@ -11,3 +11,4 @@ global using JustTip.Application.Events.Employees;
 global using JustTip.Testing.Utils.Logging;
 global using JustTip.Application.Logging;
 global using JustTip.Application.Events.Shifts;
+global using JustTip.Application.Domain.Entities.Tips;

@@ -1,4 +1,4 @@
-namespace JustTip.Application.Features.Employees.Cmd;
+namespace JustTip.Application.Features.Employees;
 public class EmployeeDto
 {
     public Guid Id { get; set; }

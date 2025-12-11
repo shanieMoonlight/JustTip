@@ -9,7 +9,7 @@ public class RemoveShiftFromEmployeeCmdHandler(IEmployeeRepo _repo) : IJtCommand
         var employee = await _repo.FirstOrDefaultByIdWithShiftsAsync(dto.EmployeeId);
 
         if (employee is null)
-            return GenResult<EmployeeDto>.NotFoundResult(JtMsgs.Error.NotFound<Employee>(dto.EmployeeId));
+            return GenResult<EmployeeDto>.NotFoundResult(JustTipMsgs.Error.NotFound<Employee>(dto.EmployeeId));
 
 
        employee.RemoveShift(dto.ShiftId);

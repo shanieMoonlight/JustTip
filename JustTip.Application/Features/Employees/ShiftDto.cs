@@ -1,6 +1,6 @@
 using JustTip.Application.Domain.Entities.Shifts;
 
-namespace JustTip.Application.Features.Employees.Cmd;
+namespace JustTip.Application.Features.Employees;
 public class ShiftDto
 {
     public Guid Id { get; set; }

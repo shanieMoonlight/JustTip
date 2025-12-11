@@ -90,7 +90,7 @@ public class UpdateEmployeeCmdHandlerTests
         // Assert
         result.ShouldBeOfType<GenResult<EmployeeDto>>();
         result.Succeeded.ShouldBeFalse();
-        result.Info.ShouldBe(JtMsgs.Error.NotFound<Employee>(Dto.Id));
+        result.Info.ShouldBe(JustTipMsgs.Error.NotFound<Employee>(Dto.Id));
     }
 
 }

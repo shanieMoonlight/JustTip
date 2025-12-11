@@ -1,4 +1,3 @@
-using JustTip.Application.Features.Employees.Cmd;
 using JustTip.Application.Features.JtOutboxMessages;
 
 namespace JustTip.Application.Features.Employees.Qry.GetAll;

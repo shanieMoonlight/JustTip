@@ -1,4 +1,4 @@
-using JustTip.Application.Features.Employees.Cmd;
+using JustTip.Application.Features.Employees;
 using JustTip.Application.Features.Maintenance.Initialize;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;

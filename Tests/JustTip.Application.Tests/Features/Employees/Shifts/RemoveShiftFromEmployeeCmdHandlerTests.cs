@@ -34,7 +34,7 @@ public class RemoveShiftFromEmployeeCmdHandlerTests
         result.ShouldBeOfType<GenResult<EmployeeDto>>();
         result.Succeeded.ShouldBeFalse();
         result.Status.ShouldBe(ResultStatus.NotFound);
-        result.Info.ShouldBe(JtMsgs.Error.NotFound<Employee>(dto.EmployeeId));
+        result.Info.ShouldBe(JustTipMsgs.Error.NotFound<Employee>(dto.EmployeeId));
     }
 
     //--------------------------// 

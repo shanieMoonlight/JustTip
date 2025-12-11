@@ -12,7 +12,7 @@ public class DeleteJtOutboxMessageCmdHandler(IJtOutboxMessageRepo _repo ) : IJtC
 
         //await uow.SaveChangesAsync(cancellationToken);
 
-        return BasicResult.Success(JtMsgs.Info.Deleted<JtOutboxMessage>(id));
+        return BasicResult.Success(JustTipMsgs.Info.Deleted<JtOutboxMessage>(id));
 
     }
 

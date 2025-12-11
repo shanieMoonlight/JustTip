@@ -31,7 +31,7 @@ public class DeleteEmployeeCmdHandlerTests
         // Assert
         result.ShouldBeOfType<BasicResult>();
         result.Succeeded.ShouldBeTrue();
-        result.Info.ShouldBe(JtMsgs.Info.Deleted<Employee>(Id));
+        result.Info.ShouldBe(JustTipMsgs.Info.Deleted<Employee>(Id));
 }
 
     //--------------------------// 

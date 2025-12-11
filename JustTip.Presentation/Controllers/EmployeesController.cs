@@ -1,4 +1,4 @@
-using JustTip.Application.Features.Employees.Cmd;
+using JustTip.Application.Features.Employees;
 using JustTip.Application.Features.Employees.Cmd.Create;
 using JustTip.Application.Features.Employees.Cmd.Delete;
 using JustTip.Application.Features.Employees.Cmd.Shifts.AddShift;
