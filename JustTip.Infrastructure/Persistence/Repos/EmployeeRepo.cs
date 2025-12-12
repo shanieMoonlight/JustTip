@@ -24,6 +24,7 @@ internal class EmployeeRepo(JtDbContext db)
             return [];
 
         return await DbCtx.Employees
+            .AsNoTracking()
             .Where(e => e.Name.Contains(filter))
             .ToListAsync();
     }

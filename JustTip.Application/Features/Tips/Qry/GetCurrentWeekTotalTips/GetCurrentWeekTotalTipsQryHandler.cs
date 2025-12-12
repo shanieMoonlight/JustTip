@@ -1,13 +1,12 @@
-﻿using JustTip.Application.Features.Roster;
+﻿using JustTip.Application.Features.Tips.Qry.GetUpcomingWeekTotalTips;
 using JustTip.Application.LocalServices.AppServices;
-using MediatR;
 
 namespace JustTip.Application.Features.Tips.Qry.GetCurrentWeekTotalTips;
 
 public class GetCurrentWeekTotalTipsQryHandler(ITipRepo tipRepo, IRosterUtils rosterUtils) 
-    : IRequestHandler<GetCurrentWeekTotalTipsQry, GenResult<RosterDto>>
+    : IRequestHandler<GetCurrentWeekTotalTipsQry, GenResult<double>>
 {
-    public async Task<GenResult<RosterDto>> Handle(GetCurrentWeekTotalTipsQry request, CancellationToken cancellationToken)
+    public async Task<GenResult<double>> Handle(GetCurrentWeekTotalTipsQry request, CancellationToken cancellationToken)
     {
         // Use UTC timezone . DB is in UTC
         DateTime now = DateTime.UtcNow;
@@ -15,13 +14,9 @@ public class GetCurrentWeekTotalTipsQryHandler(ITipRepo tipRepo, IRosterUtils ro
         DateTime weekEnd = weekStart.AddDays(7); // exclusive
 
         // Repo must return shifts with employee info loaded
-        var shifts = await tipRepo.ListByDateRangeAsync(weekStart, weekEnd, cancellationToken);
+        var total = await tipRepo.GetTotalTipsAsync(weekStart, weekEnd, cancellationToken);
 
-
-        var dto = rosterUtils.ConvertToShiftRosterItemDto(shifts, weekStart, weekEnd);
-
-
-        return GenResult<RosterDto>.Success(dto);
+        return GenResult<double>.Success((double)total);
     }
 
 }//Cls

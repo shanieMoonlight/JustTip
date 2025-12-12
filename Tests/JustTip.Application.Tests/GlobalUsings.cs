@@ -21,3 +21,4 @@ global using JustTip.Application.Features.Tips;
 global using JustTip.Application.Features.Tips.Cmd.Update;
 global using JustTip.Application.Features.Tips.Cmd.Create;
 global using JustTip.Dtos.Tests.Data.Initializers;
+global using JustTip.Application.LocalServices.AppServices;

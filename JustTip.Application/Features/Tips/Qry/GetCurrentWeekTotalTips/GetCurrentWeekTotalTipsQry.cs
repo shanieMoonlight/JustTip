@@ -1,7 +1,4 @@
-﻿using JustTip.Application.Features.Roster;
-using MediatR;
-
-namespace JustTip.Application.Features.Tips.Qry.GetCurrentWeekTotalTips;
+﻿namespace JustTip.Application.Features.Tips.Qry.GetCurrentWeekTotalTips;
 
 
-public record GetCurrentWeekTotalTipsQry() : IRequest<GenResult<RosterDto>>;
+public record GetCurrentWeekTotalTipsQry() : IRequest<GenResult<double>>;

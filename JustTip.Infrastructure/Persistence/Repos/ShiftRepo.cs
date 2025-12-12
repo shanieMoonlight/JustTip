@@ -12,6 +12,7 @@ internal class ShiftRepo(JtDbContext db) : AGenCrudRepo<Shift>(db), IShiftRepo
             return [];
 
         return await DbCtx.Shifts
+            .AsNoTracking()
             .Where(e => e.StartTimeUtc >= start && e.EndTimeUtc <= end)
             .Include(e => e.Employee)
             .ToListAsync(cancellationToken);

@@ -7,6 +7,7 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using System.Diagnostics;
 
 
 namespace JustTip.Infrastructure.Persistence;
@@ -47,7 +48,8 @@ internal static class PersistenceSetup
                 config
                     .EnableSensitiveDataLogging(true)
                     .EnableDetailedErrors(true)
-                    .LogTo(Console.WriteLine, LogLevel.Information);
+                    .LogTo(Console.WriteLine, LogLevel.Information)
+                    .LogTo(log => Debug.WriteLine(log), LogLevel.Information);
             }
 
         });

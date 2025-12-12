@@ -4,6 +4,8 @@ using JustTip.Application.Features.Tips.Cmd.Delete;
 using JustTip.Application.Features.Tips.Cmd.Update;
 using JustTip.Application.Features.Tips.Qry.GetAll;
 using JustTip.Application.Features.Tips.Qry.GetById;
+using JustTip.Application.Features.Tips.Qry.GetCurrentWeekTotalTips;
+using JustTip.Application.Features.Tips.Qry.GetUpcomingWeekTotalTips;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -51,6 +53,18 @@ public class TipsController(ISender sender, ILogger<TipsController> logger) : Co
 
     //--------------------------// 
 
+    [HttpGet]
+    public async Task<ActionResult<TipDto>> GetTotalTipsCurrentWeek() =>
+        this.ProcessResult(await sender.Send(new GetCurrentWeekTotalTipsQry()), logger);
+
+    //--------------------------// 
+
+    [HttpGet]
+    public async Task<ActionResult<TipDto>> GetTotalTipsUpcomingWeek() =>
+        this.ProcessResult(await sender.Send(new GetUpcomingWeekTotalTipsQry()), logger);
+
+    //--------------------------// 
+
 
     ///// <summary>
     ///// Gets a paginated list of Tips
@@ -58,7 +72,7 @@ public class TipsController(ISender sender, ILogger<TipsController> logger) : Co
     ///// <param name="request">Filtering and Sorting Info</param>
     ///// <returns>Paginated list of Tips</returns>
     //[HttpPost]
-        //public async Task<ActionResult<PagedResponse<TipDto>>> Page(PagedRequest? request) =>
+    //public async Task<ActionResult<PagedResponse<TipDto>>> Page(PagedRequest? request) =>
     //    this.ProcessResult(await sender.Send(new GetTipsPageQry(request)), logger);
 
 

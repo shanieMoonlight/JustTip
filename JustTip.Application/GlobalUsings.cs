@@ -5,3 +5,4 @@ global using JustTip.Application.Domain.Entities.OutboxMessages;
 global using JustTip.Application.Domain.Entities.Employees;
 global using JustTip.Application.Domain.Entities.Shifts;
 global using JustTip.Application.Domain.Entities.Tips;
+global using MediatR;
