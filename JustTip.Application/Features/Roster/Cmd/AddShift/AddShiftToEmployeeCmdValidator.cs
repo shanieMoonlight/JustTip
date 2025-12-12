@@ -1,6 +1,6 @@
 using FluentValidation;
 
-namespace JustTip.Application.Features.Employees.Cmd.Shifts.AddShift;
+namespace JustTip.Application.Features.Roster.Cmd.AddShift;
 public class AddShiftToEmployeeCmdValidator : AbstractValidator<AddShiftToEmployeeCmd>
 {
     public AddShiftToEmployeeCmdValidator()

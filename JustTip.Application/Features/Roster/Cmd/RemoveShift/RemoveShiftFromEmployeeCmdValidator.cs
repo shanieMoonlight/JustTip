@@ -1,6 +1,6 @@
 using FluentValidation;
 
-namespace JustTip.Application.Features.Employees.Cmd.Shifts.RemoveShift;
+namespace JustTip.Application.Features.Roster.Cmd.RemoveShift;
 public class RemoveShiftFromEmployeeCmdValidator : AbstractValidator<RemoveShiftFromEmployeeCmd>
 {
     public RemoveShiftFromEmployeeCmdValidator()

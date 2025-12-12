@@ -1,4 +1,4 @@
-﻿namespace JustTip.Application.Features.Employees;
+﻿namespace JustTip.Application.Features.Roster;
 internal static class ShiftExtensions
 {
     public static Shift Update(this Shift model, ShiftDto dto) =>

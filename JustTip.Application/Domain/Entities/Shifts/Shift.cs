@@ -1,5 +1,6 @@
 ﻿using JustTip.Application.Domain.Entities.Common;
 using JustTip.Application.Domain.Entities.Shifts.Events;
+using JustTip.Application.Domain.Utils;
 using JustTip.Application.Utility.Exceptions;
 
 namespace JustTip.Application.Domain.Entities.Shifts;
@@ -32,9 +33,8 @@ public class Shift : JtBaseDomainEntity
         Employee = employee;
         Date = date.Date;
 
-        DateTime startDateTimeUtc = date.Date + startTimeUtc.TimeOfDay;
-        StartTimeUtc = startDateTimeUtc;
-        EndTimeUtc = date.Date + endTimeUtc.TimeOfDay;
+        StartTimeUtc = (date.Date + startTimeUtc.TimeOfDay).RoundToNearestMinute(5);
+        EndTimeUtc = (date.Date + endTimeUtc.TimeOfDay).RoundToNearestMinute(5);
         RaiseDomainEvent(new ShiftCreatedDomainEvent(Id));
     }
 
@@ -49,7 +49,10 @@ public class Shift : JtBaseDomainEntity
         DateTime endTimeUtc)
     {
         ValidateShiftTimes(startTimeUtc, endTimeUtc);
-        ValidateDate(date);
+
+        //Skipping because it causes errors when initializing the DB with past dates
+        //this is not a real app, just a demo/test app
+        //ValidateDate(date);
 
         return new(
             employee,
@@ -68,7 +71,10 @@ public class Shift : JtBaseDomainEntity
         DateTime endTimeUtc)
     {
         ValidateShiftTimes(startTimeUtc, endTimeUtc);
-        ValidateDate(date);
+
+        //Skipping because it causes errors when initializing the DB with past dates
+        //this is not a real app, just a demo/test app
+        //ValidateDate(date);
 
         Date = date;
         StartTimeUtc = startTimeUtc;

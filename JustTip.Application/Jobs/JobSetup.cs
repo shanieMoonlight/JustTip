@@ -15,10 +15,11 @@ internal static class JobSetup2
     //---------------------//
 
 
-    internal static async Task<IServiceProvider> StartEssentialJobsAsync(this IServiceProvider provider)
+    internal static async Task<IServiceProvider> StartRecurringJtJobs(this IServiceProvider provider)
     {
-
-        await provider.StartOutboxMsgJobsAsync();
+        using var scope = provider.CreateScope();
+        var scopedProvider = scope.ServiceProvider;
+        await scopedProvider.StartOutboxMsgJobsAsync();
 
         return provider;
     }

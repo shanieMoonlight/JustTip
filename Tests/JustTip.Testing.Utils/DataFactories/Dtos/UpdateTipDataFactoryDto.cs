@@ -1,6 +1,6 @@
 using JustTip.Application.Features.Tips;
 
-namespace JustTip.Dtos.Tests.Data.Initializers;
+namespace JustTip.Testing.Utils.DataFactories.Dtos;
 
 public static class UpdateTipDtoDataFactory
 {

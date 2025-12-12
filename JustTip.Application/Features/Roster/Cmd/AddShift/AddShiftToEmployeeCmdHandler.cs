@@ -1,4 +1,4 @@
-namespace JustTip.Application.Features.Employees.Cmd.Shifts.AddShift;
+namespace JustTip.Application.Features.Roster.Cmd.AddShift;
 public class AddShiftToEmployeeCmdHandler(IEmployeeRepo _repo) : IJtCommandHandler<AddShiftToEmployeeCmd, ShiftDto>
 {
     public async Task<GenResult<ShiftDto>> Handle(AddShiftToEmployeeCmd request, CancellationToken cancellationToken)

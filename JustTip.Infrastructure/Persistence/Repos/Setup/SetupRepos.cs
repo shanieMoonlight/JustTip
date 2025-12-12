@@ -1,6 +1,7 @@
 ﻿using JustTip.Application.Domain.Entities;
 using JustTip.Application.Domain.Entities.Employees;
 using JustTip.Application.Domain.Entities.OutboxMessages;
+using JustTip.Application.Domain.Entities.Shifts;
 using JustTip.Application.Domain.Entities.Tips;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
@@ -12,6 +13,7 @@ internal static  class SetupRepos
     {
         services.TryAddScoped<IEmployeeRepo, EmployeeRepo>();
         services.TryAddScoped<ITipRepo, TipRepo>();
+        services.TryAddScoped<IShiftRepo, ShiftRepo>();
         services.TryAddScoped<IJtOutboxMessageRepo, JtOutboxMessageRepo>();
 
         services.TryAddScoped<IJtUnitOfWork, JtUnitOfWork>();

@@ -1,8 +1,6 @@
 ﻿using JustTip.Application.Domain.Entities;
 using JustTip.Application.Domain.Entities.Common.Events;
-using JustTip.Application.Domain.Entities.OutboxMessages;
 using JustTip.Application.Logging;
-using JustTip.Application.Utility;
 using JustTip.Application.Utility.Json;
 using MediatR;
 using Microsoft.Extensions.Logging;
@@ -13,7 +11,7 @@ namespace JustTip.Application.Jobs.OutboxMsgs;
 
 
 public class ProcessOutboxMsgJob(IJtUnitOfWork uow, IPublisher publisher, ILogger<ProcessOutboxMsgJob> logger)
-    : AJobHandler("GB_OUTBOX_MSG_JOB")
+    : AJobHandler("JT_OUTBOX_MSG_JOB")
 {
 
     public override async Task HandleAsync()
@@ -21,7 +19,7 @@ public class ProcessOutboxMsgJob(IJtUnitOfWork uow, IPublisher publisher, ILogge
         IJtOutboxMessageRepo _repo = uow.OutboxMessageRepo;
         try
         {
-            var msgs = await _repo.TakeUnprocessedAsync(30);
+            var msgs = await _repo.TakeUnprocessedAsync(40);
 
             if (!msgs.Any())
                 return;

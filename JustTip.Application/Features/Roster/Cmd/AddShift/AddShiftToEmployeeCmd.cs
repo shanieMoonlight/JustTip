@@ -1,4 +1,4 @@
-namespace JustTip.Application.Features.Employees.Cmd.Shifts.AddShift;
+namespace JustTip.Application.Features.Roster.Cmd.AddShift;
 
 
 public record AddShiftToEmployeeCmd(ShiftDto Dto) : IJtCommand<ShiftDto>;

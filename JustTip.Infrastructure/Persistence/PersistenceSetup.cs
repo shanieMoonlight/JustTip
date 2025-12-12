@@ -1,5 +1,4 @@
-﻿using EfHelpers.Interceptors;
-using JustTip.Infrastructure.Persistence.Interceptors;
+﻿using JustTip.Infrastructure.Persistence.Interceptors;
 using JustTip.Infrastructure.Persistence.Repos.Setup;
 using JustTip.Infrastructure.Persistence.Utils;
 using Microsoft.EntityFrameworkCore;

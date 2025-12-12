@@ -3,6 +3,7 @@ using JustTip.Application.Domain.Entities.Employees.Events;
 using JustTip.Application.Logging;
 using MediatR;
 using Microsoft.Extensions.Logging;
+using System.Diagnostics;
 
 namespace JustTip.Application.Events.Employees;
 public class UpdateEmployeeEventHandler(IJtUnitOfWork uow, ILogger<UpdateEmployeeEventHandler> logger)
@@ -30,6 +31,7 @@ public class UpdateEmployeeEventHandler(IJtUnitOfWork uow, ILogger<UpdateEmploye
             }
 
             Console.WriteLine($"Do some processing for Employee, Name: {employee.Name}, ID: {employeeId}");
+            Debug.WriteLine($"Do some processing for Employee, Name: {employee.Name}, ID: {employeeId}");
         }
         catch (Exception e)
         {

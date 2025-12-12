@@ -1,12 +1,13 @@
 using JustTip.Application.Features.Employees;
 using JustTip.Application.Features.Employees.Cmd.Create;
 using JustTip.Application.Features.Employees.Cmd.Delete;
-using JustTip.Application.Features.Employees.Cmd.Shifts.AddShift;
-using JustTip.Application.Features.Employees.Cmd.Shifts.RemoveShift;
 using JustTip.Application.Features.Employees.Cmd.Update;
 using JustTip.Application.Features.Employees.Qry.GetAll;
 using JustTip.Application.Features.Employees.Qry.GetById;
 using JustTip.Application.Features.Employees.Qry.GetFiltered;
+using JustTip.Application.Features.Roster;
+using JustTip.Application.Features.Roster.Cmd.AddShift;
+using JustTip.Application.Features.Roster.Cmd.RemoveShift;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 

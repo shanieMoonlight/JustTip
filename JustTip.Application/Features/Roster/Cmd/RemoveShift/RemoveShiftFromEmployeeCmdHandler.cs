@@ -1,4 +1,6 @@
-namespace JustTip.Application.Features.Employees.Cmd.Shifts.RemoveShift;
+using JustTip.Application.Features.Employees;
+
+namespace JustTip.Application.Features.Roster.Cmd.RemoveShift;
 public class RemoveShiftFromEmployeeCmdHandler(IEmployeeRepo _repo) : IJtCommandHandler<RemoveShiftFromEmployeeCmd, EmployeeDto>
 {
     public async Task<GenResult<EmployeeDto>> Handle(RemoveShiftFromEmployeeCmd request, CancellationToken cancellationToken)

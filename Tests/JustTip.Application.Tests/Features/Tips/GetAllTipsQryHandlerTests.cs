@@ -60,6 +60,5 @@ public class GetAllTipsQryHandlerTests
         result.Value.ShouldBeEmpty();
     }
 
-    //--------------------------// 
 
 }//Cls

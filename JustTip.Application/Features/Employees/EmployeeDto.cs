@@ -1,3 +1,5 @@
+using JustTip.Application.Features.Roster;
+
 namespace JustTip.Application.Features.Employees;
 public class EmployeeDto
 {

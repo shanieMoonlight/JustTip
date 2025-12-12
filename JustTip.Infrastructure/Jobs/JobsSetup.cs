@@ -1,5 +1,6 @@
 ﻿using Hangfire;
 using JustTip.Application.Jobs;
+using JustTip.Application.Jobs.Abstractions;
 using JustTip.Infrastructure.Jobs.Hangfire;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
@@ -13,6 +14,7 @@ internal static class JobsSetup
     {
         services.AddHangfireHelper_InMemory(connectionString);
         services.TryAddScoped<IJobService, HfJobService>();
+        services.TryAddScoped<ICronBuilder, HfCronBuilder>();
         return services;
     }
 

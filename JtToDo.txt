@@ -6,3 +6,10 @@ Delete IShiftRepo
     }
 
     AddEmptyHandlers
+
+
+    Round times to nearest minute or 5 minutes
+
+
+    •	Time zones & grouping: If managers expect local dates, compute weekStart/end in manager local time and convert to UTC for DB queries. 
+    If shifts stored in UTC use StartTimeUtc for filtering and convert to local for grouping/display.

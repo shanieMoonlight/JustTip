@@ -1,4 +1,4 @@
-using JustTip.Application.Features.Employees.Cmd.Shifts.RemoveShift;
+using JustTip.Application.Features.Roster.Cmd.RemoveShift;
 using JustTip.Testing.Utils.DataFactories.Dtos;
 using static Jt.Application.Utility.Results.BasicResult;
 

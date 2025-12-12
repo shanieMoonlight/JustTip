@@ -1,4 +1,6 @@
-﻿using JustTip.Application.Mediatr;
+﻿using JustTip.Application.Jobs;
+using JustTip.Application.LocalServices;
+using JustTip.Application.Mediatr;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -10,8 +12,8 @@ public static class ApplicationSetup
     {
         services
             .AddMediatr()
-            //.AddJtJobs()
-            ;
+            .AddJtJobs()
+            .AddLocalServices();
 
         return services;
     }
@@ -19,11 +21,11 @@ public static class ApplicationSetup
 
     //--------------------------------//
 
-    public static async Task<WebApplication> UseJtApplicationAsync(
-        this WebApplication app)
+    public static async Task<IApplicationBuilder> UseJtApplicationAsync(
+        this IApplicationBuilder app)
     {
 
-        //await app.Services.StartEssentialJobsAsync();
+        await app.ApplicationServices.StartRecurringJtJobs();
         return app;
 
     }

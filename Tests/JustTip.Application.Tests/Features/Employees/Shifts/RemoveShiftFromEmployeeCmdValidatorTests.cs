@@ -1,4 +1,4 @@
-using JustTip.Application.Features.Employees.Cmd.Shifts.RemoveShift;
+using JustTip.Application.Features.Roster.Cmd.RemoveShift;
 
 namespace JustTip.Application.Tests.Features.Employees.Shifts;
 

@@ -5,5 +5,8 @@ namespace JustTip.Application.Domain.Entities.Shifts;
 /// <summary>
 /// Interface for Employee Repository
 /// </summary>
-public interface IShiftRepo : IGenCrudRepo<Shift> { }
+public interface IShiftRepo : IGenReadRepo<Shift>, IGenUpdateRepo<Shift>
+{
+    Task<IReadOnlyList<Shift>> ListByDateRangeWithEmployeeAsync(DateTime start, DateTime end, CancellationToken cancellationToken);
+}
 

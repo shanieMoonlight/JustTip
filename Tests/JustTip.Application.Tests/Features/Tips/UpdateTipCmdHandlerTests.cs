@@ -1,4 +1,4 @@
-using JustTip.Dtos.Tests.Data.Initializers;
+using JustTip.Testing.Utils.DataFactories.Dtos;
 
 namespace JustTip.Application.Tests.Features.Tips;
 

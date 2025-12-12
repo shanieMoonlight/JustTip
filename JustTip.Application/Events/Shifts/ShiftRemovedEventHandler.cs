@@ -3,6 +3,7 @@ using JustTip.Application.Domain.Entities.Employees.Events;
 using JustTip.Application.Logging;
 using MediatR;
 using Microsoft.Extensions.Logging;
+using System.Diagnostics;
 
 namespace JustTip.Application.Events.Shifts;
 public class ShiftRemovedEventHandler(IJtUnitOfWork uow, ILogger<ShiftRemovedEventHandler> logger)
@@ -41,6 +42,7 @@ public class ShiftRemovedEventHandler(IJtUnitOfWork uow, ILogger<ShiftRemovedEve
             }
 
             Console.WriteLine($"Sending Shift REMOVED email for Employee, Name: {employee.Name}, ID: {employeeId}");
+            Debug.WriteLine($"Sending Shift REMOVED email for Employee, Name: {employee.Name}, ID: {employeeId}");
         }
         catch (Exception ex)
         {
