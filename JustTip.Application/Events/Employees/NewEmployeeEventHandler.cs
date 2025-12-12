@@ -1,7 +1,6 @@
 ﻿using JustTip.Application.Domain.Entities;
 using JustTip.Application.Domain.Entities.Employees.Events;
 using JustTip.Application.Logging;
-using MediatR;
 using Microsoft.Extensions.Logging;
 using System.Diagnostics;
 

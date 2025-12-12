@@ -4,6 +4,7 @@ using JustTip.Application.Features.Employees.Cmd.Delete;
 using JustTip.Application.Features.Employees.Cmd.Update;
 using JustTip.Application.Features.Employees.Qry.GetAll;
 using JustTip.Application.Features.Employees.Qry.GetById;
+using JustTip.Application.Features.Employees.Qry.GetEmployeeWeeklySummary;
 using JustTip.Application.Features.Employees.Qry.GetFiltered;
 using JustTip.Application.Features.Roster;
 using JustTip.Application.Features.Roster.Cmd.AddShift;
@@ -133,6 +134,12 @@ public class EmployeesController(ISender sender) : Controller
     public async Task<ActionResult<EmployeeDto>> RemoveShift([FromBody] RemoveShiftDto shift) =>
         this.ProcessResult(await sender.Send(new RemoveShiftFromEmployeeCmd(shift)));
 
+
+    //--------------------------// 
+
+    [HttpGet("{id}")]
+    public async Task<ActionResult<RosterDto>> GetEmployeeWeeklySummary(Guid id) =>
+        this.ProcessResult(await sender.Send(new GetEmployeeWeeklySummaryQry(id)));
 
     ////--------------------------// 
 

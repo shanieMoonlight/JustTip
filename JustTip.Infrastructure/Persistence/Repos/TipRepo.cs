@@ -1,4 +1,5 @@
 ﻿using JustTip.Application.Domain.Entities.Tips;
+using JustTip.Application.Domain.Utils;
 using JustTip.Infrastructure.Persistence.Repos.Abstractions;
 using Microsoft.EntityFrameworkCore;
 
@@ -12,8 +13,8 @@ internal class TipRepo(JtDbContext db)
             return [];
 
         // ensure UTC
-        DateTime startUtc = ToUtcDate(start);
-        DateTime endUtc = ToUtcDate(end);
+        DateTime startUtc = start.ToUtcDate();
+        DateTime endUtc = end.ToUtcDate();
 
         return await DbCtx.Set<Tip>()
                 .AsNoTracking()
@@ -27,8 +28,8 @@ internal class TipRepo(JtDbContext db)
     public async Task<decimal> GetTotalTipsAsync(DateTime start, DateTime end, CancellationToken cancellationToken)
     {
         // ensure UTC
-        DateTime startUtc = ToUtcDate(start);
-        DateTime endUtc = ToUtcDate(end);
+        DateTime startUtc = start.ToUtcDate();
+        DateTime endUtc = end.ToUtcDate();
 
         var total = await DbCtx.Set<Tip>()
             .AsNoTracking()
@@ -39,12 +40,6 @@ internal class TipRepo(JtDbContext db)
         return total ;
     }
 
-    //--------------------------//
-
-    private static DateTime ToUtcDate(DateTime dt) =>
-        dt.Kind == DateTimeKind.Utc
-            ? dt
-            : DateTime.SpecifyKind(dt, DateTimeKind.Utc).ToUniversalTime();
 
 
 }//Cls

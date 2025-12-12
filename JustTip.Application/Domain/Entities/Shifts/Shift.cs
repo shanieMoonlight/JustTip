@@ -2,6 +2,7 @@
 using JustTip.Application.Domain.Entities.Shifts.Events;
 using JustTip.Application.Domain.Utils;
 using JustTip.Application.Utility.Exceptions;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace JustTip.Application.Domain.Entities.Shifts;
 public class Shift : JtBaseDomainEntity
@@ -14,6 +15,10 @@ public class Shift : JtBaseDomainEntity
 
     public Guid EmployeeId { get; private set; }
     public Employee? Employee { get; private set; }
+
+
+    [NotMapped]
+    public TimeSpan Duration => EndTimeUtc - StartTimeUtc;
 
     //--------------------------// 
 

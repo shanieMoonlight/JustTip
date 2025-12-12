@@ -1,4 +1,5 @@
-﻿using JustTip.Application.LocalServices.AppServices;
+﻿using JustTip.Application.LocalServices.Abs;
+using JustTip.Application.LocalServices.AppServices;
 using JustTip.Application.LocalServices.Imps;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -10,7 +11,8 @@ public static class LocalServicesSetup
     {
 
         return services
-            .AddScoped<IRosterUtils, RosterUtils>();
+            .AddScoped<IRosterUtils, RosterUtils>()
+            .AddScoped<ITipCalculatorService, TipCalculatorService>();
 
     }
 

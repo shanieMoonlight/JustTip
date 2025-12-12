@@ -10,4 +10,5 @@ public interface IGenCrudRepo<T> :
     IGenReadRepo<T>,
     IGenUpdateRepo<T>,
     IGenDeleteRepo<T> where T : JtBaseDomainEntity
-{ }
+{
+}
