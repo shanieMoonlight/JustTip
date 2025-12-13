@@ -1,3 +1,4 @@
+using JustTip.Application.Features.Employees;
 using JustTip.Application.Features.Employees.Cmd.Update;
 using JustTip.Testing.Utils.DataFactories;
 using JustTip.Testing.Utils.DataFactories.Dtos;
@@ -47,7 +48,7 @@ public class UpdateEmployeeCmdHandlerTests
                  .ReturnsAsync((Employee entity) => entity);
 
         // Act
-        var result = await _handler.Handle(new UpdateEmployeeCmd(requestDto), CancellationToken.None);
+        var result = await _handler.Handle(new UpdateEmployeeCmd(Id, requestDto), CancellationToken.None);
 
         // Assert
         result.ShouldBeOfType<GenResult<EmployeeDto>>();
@@ -79,13 +80,14 @@ public class UpdateEmployeeCmdHandlerTests
     public async Task Handle_ShouldReturnNotFound_WhenEmployeeNotFound()
     {
         // Arrange
-        var Dto = new EmployeeDto { Id = Guid.NewGuid() };
+        var employeeId = Guid.NewGuid();
+        var Dto = new EmployeeDto { Id = employeeId };
 
         _mockRepo.Setup(repo => repo.FirstOrDefaultByIdAsync(Dto.Id))
                  .ReturnsAsync((Employee)null!);
 
         // Act
-        var result = await _handler.Handle(new UpdateEmployeeCmd(Dto), CancellationToken.None);
+        var result = await _handler.Handle(new UpdateEmployeeCmd(employeeId, Dto), CancellationToken.None);
 
         // Assert
         result.ShouldBeOfType<GenResult<EmployeeDto>>();

@@ -9,5 +9,8 @@ public class UpdateEmployeeCmdValidator : AbstractValidator<UpdateEmployeeCmd>
         .NotEmpty()
                 .WithMessage(JustTipMsgs.Error.IsRequired("{PropertyName}"));
 
+            RuleFor(p => p.Id)
+            .NotEmpty()
+                .WithMessage(JustTipMsgs.Error.IsRequired("{PropertyName}"));
     }
 }//Cls

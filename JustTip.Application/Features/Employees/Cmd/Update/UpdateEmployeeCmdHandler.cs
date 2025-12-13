@@ -1,14 +1,17 @@
+using JustTip.Application.Features.Tips;
+
 namespace JustTip.Application.Features.Employees.Cmd.Update;
 public class UpdateEmployeeCmdHandler(IEmployeeRepo _repo ) : IJtCommandHandler<UpdateEmployeeCmd, EmployeeDto>
 {
     public async Task<GenResult<EmployeeDto>> Handle(UpdateEmployeeCmd request, CancellationToken cancellationToken)
     {
         var dto = request.Dto;
+        var id = request.Id;
 
         if (dto == null)
             return GenResult<EmployeeDto>.BadRequestResult(JustTipMsgs.Error.NO_DATA_SUPPLIED);
 
-        var mdl = await _repo.FirstOrDefaultByIdAsync(dto.Id);
+        var mdl = await _repo.FirstOrDefaultByIdAsync(id);
         if (mdl == null)
             return GenResult<EmployeeDto>.NotFoundResult(JustTipMsgs.Error.NotFound<Employee>(dto.Id));
 

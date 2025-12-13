@@ -25,6 +25,17 @@ _builder
     .InstallArchitecture(_startupData)
     .InstallLogging(_startupData);
 
+_services.AddEndpointsApiExplorer();
+_services.AddSwaggerGen();
+
+_services.AddCors(options =>
+    options.AddDefaultPolicy(policy => policy
+            .AllowAnyHeader()
+            .AllowAnyMethod()
+            .WithOrigins(_startupData.GetAllowedOrigins())
+        )
+    );
+
 
 //------------------------- Configure AppBuilder -------------------------//
 
@@ -40,9 +51,16 @@ var app = _builder.Build();
 app.UseCustomExceptionHandler(new JtExceptionConverter());
 
 
+app.UseRouting();
+app.UseCors();
+
+
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
+    app.UseSwagger();
+    app.UseSwaggerUI();
+
     app.MapOpenApi();
     app.MapScalarApiReference(_startupData.ScalarSection.GetEndPointPrefix(), opts =>
     {
@@ -53,7 +71,7 @@ if (app.Environment.IsDevelopment())
     });
 }
 
-app.UseHttpsRedirection();
+//app.UseHttpsRedirection();
 
 app.UseAuthorization();
 

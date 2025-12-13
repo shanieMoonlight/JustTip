@@ -47,9 +47,9 @@ public class EmployeesController(ISender sender) : Controller
     /// An <see cref="ActionResult{EmployeeDto}"/> containing the updated <see cref="EmployeeDto"/>
     /// or an appropriate error result (for example NotFound).
     /// </returns>
-    [HttpPatch]
-    public async Task<ActionResult<EmployeeDto>> Edit([FromBody] EmployeeDto dto) =>
-        this.ProcessResult(await sender.Send(new UpdateEmployeeCmd(dto)));
+    [HttpPatch("{id}")]
+    public async Task<ActionResult<EmployeeDto>> Edit([FromRoute] Guid id, [FromBody] EmployeeDto dto) =>
+        this.ProcessResult(await sender.Send(new UpdateEmployeeCmd(id, dto)));
 
     //--------------------------// 
 

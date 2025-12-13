@@ -5,6 +5,7 @@ using JustTip.Application.Features.Tips.Cmd.Update;
 using JustTip.Application.Features.Tips.Qry.GetAll;
 using JustTip.Application.Features.Tips.Qry.GetById;
 using JustTip.Application.Features.Tips.Qry.GetCurrentWeekTotalTips;
+using JustTip.Application.Features.Tips.Qry.GetTipsTotalByWeek;
 using JustTip.Application.Features.Tips.Qry.GetUpcomingWeekTotalTips;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -54,14 +55,20 @@ public class TipsController(ISender sender, ILogger<TipsController> logger) : Co
     //--------------------------// 
 
     [HttpGet]
-    public async Task<ActionResult<TipDto>> GetTotalTipsCurrentWeek() =>
+    public async Task<ActionResult<double>> GetTotalTipsCurrentWeek() =>
         this.ProcessResult(await sender.Send(new GetCurrentWeekTotalTipsQry()), logger);
 
     //--------------------------// 
 
-    [HttpGet]
-    public async Task<ActionResult<TipDto>> GetTotalTipsUpcomingWeek() =>
-        this.ProcessResult(await sender.Send(new GetUpcomingWeekTotalTipsQry()), logger);
+    [HttpGet("{weekNumber}")]
+    public async Task<ActionResult<double>> GetTotalTipsByWeek(int? weekNumber) =>
+        this.ProcessResult(await sender.Send(new GetTipsTotalByWeekQry(weekNumber)), logger);
+
+    //--------------------------// 
+
+    [HttpGet("{weekNumber}")]
+    public async Task<ActionResult<double>> GetAllTipsByWeek(int? weekNumber) =>
+        this.ProcessResult(await sender.Send(new GetAllTipsByWeekQry(weekNumber ?? 0)), logger);
 
     //--------------------------// 
 
