@@ -1,24 +1,24 @@
+using Jt.Application.Utility.Results;
 using JustTip.Application.LocalServices.AppServices;
 
-namespace JustTip.Application.Features.Employees.Qry.GetEmployeePreviousWeeklySummary;
+namespace JustTip.Application.Features.Employees.Qry.GetEmployeeWeeklySummaryByWeek;
 
-public class GetEmployeePreviousWeeklySummaryHandler(
+public class GetEmployeeWeeklySummaryByWeekHandler(
     IEmployeeRepo employeeRepo,
     IShiftRepo shiftRepo,
     ITipRepo tipRepo,
     IRosterUtils rosterUtils,
     ITipCalculatorService tipCalculator)
-    : IRequestHandler<GetEmployeePreviousWeeklySummaryQry, GenResult<EmployeeWeeklySummaryDto>>
+    : IRequestHandler<GetEmployeeWeeklySummaryByWeekQry, GenResult<EmployeeWeeklySummaryDto>>
 {
-    public async Task<GenResult<EmployeeWeeklySummaryDto>> Handle(GetEmployeePreviousWeeklySummaryQry request, CancellationToken cancellationToken)
+    public async Task<GenResult<EmployeeWeeklySummaryDto>> Handle(GetEmployeeWeeklySummaryByWeekQry request, CancellationToken cancellationToken)
     {
-        if (request.WeeksAgo < 0)
-            return GenResult<EmployeeWeeklySummaryDto>.BadRequestResult("WeeksAgo must be >= 0");
+        //We are always looking for previous or current weeks
+        int weekNumber = Math.Abs(request.WeekNumber ?? 0);
 
-        // Compute week start by going back WeeksAgo weeks from most recent Monday
         var now = DateTime.UtcNow;
         var thisWeekStart = rosterUtils.GetMostRecentMonday(now);
-        var targetWeekStart = thisWeekStart.AddDays(-7 * request.WeeksAgo);
+        var targetWeekStart = thisWeekStart.AddDays(-7 * weekNumber);
         var targetWeekEnd = targetWeekStart.AddDays(7);
 
         var employee = await employeeRepo.FirstOrDefaultByIdWithShiftsAsync(request.EmployeeId);
@@ -31,11 +31,11 @@ public class GetEmployeePreviousWeeklySummaryHandler(
 
         var calc = tipCalculator.Calculate(empSeconds, totalSeconds, totalTips);
         var dto = new EmployeeWeeklySummaryDto(
-            employee.Id,
-            employee.Name,
-            calc.Hours,
+            employee.Id, 
+            employee.Name, 
+            calc.Hours, 
             (double)calc.TipShare,
-            rosterUtils.ToLocalTime(targetWeekStart),
+            rosterUtils.ToLocalTime(targetWeekStart), 
             rosterUtils.ToLocalTime(targetWeekEnd));
         return GenResult<EmployeeWeeklySummaryDto>.Success(dto);
     }

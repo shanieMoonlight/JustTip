@@ -1,5 +1,6 @@
 using JustTip.Application.Features.Roster;
 using JustTip.Application.Features.Roster.Cmd.AddShift;
+using JustTip.Application.Features.Roster.Cmd.UpdateShift;
 using JustTip.Testing.Utils.DataFactories.Dtos;
 using static Jt.Application.Utility.Results.BasicResult;
 
@@ -24,7 +25,7 @@ public class AddShiftToEmployeeCmdHandlerTests
     public async Task Handle_ShouldReturnNotFound_WhenEmployeeDoesNotExist()
     {
         // Arrange
-        var requestDto = ShiftDtoDataFactory.Create();
+        var requestDto = new AddShiftDto();
         _mockRepo.Setup(repo => repo.FirstOrDefaultByIdAsync(It.IsAny<Guid?>()))
                  .ReturnsAsync((Employee?)null);
 
@@ -45,14 +46,14 @@ public class AddShiftToEmployeeCmdHandlerTests
     {
         // Arrange
         var employee = Employee.Create("Test Employee", "desc");
-        var requestDto = ShiftDtoDataFactory.Create(employeeId: employee.Id);
-
         // Provide valid future date and valid start/end times
         var date = DateTime.UtcNow.AddDays(1).Date;
         var start = date.AddHours(9);   // 09:00 on that date
         var end = date.AddHours(17);    // 17:00 on that date
 
-        requestDto = ShiftDtoDataFactory.Update(requestDto, date: date, startTimeUtc: start, endTimeUtc: end);
+        var requestDto = new AddShiftDto() { EmployeeId = employee.Id ,
+            Date = date, StartTimeUtc = start, EndTimeUtc = end
+            };
 
         _mockRepo.Setup(repo => repo.FirstOrDefaultByIdAsync(It.Is<Guid?>(g => g == employee.Id)))
                  .ReturnsAsync(employee);

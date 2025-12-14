@@ -5,7 +5,11 @@ public class RemoveShiftFromEmployeeCmdValidator : AbstractValidator<RemoveShift
 {
     public RemoveShiftFromEmployeeCmdValidator()
     {
-        RuleFor(p => p.Dto)
+        RuleFor(p => p.EmployeeId)
+        .NotEmpty()
+              .WithMessage(JustTipMsgs.Error.IsRequired("{PropertyName}"));
+
+        RuleFor(p => p.ShiftId)
         .NotEmpty()
               .WithMessage(JustTipMsgs.Error.IsRequired("{PropertyName}"));
 

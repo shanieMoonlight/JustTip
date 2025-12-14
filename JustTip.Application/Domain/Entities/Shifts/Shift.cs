@@ -38,8 +38,8 @@ public class Shift : JtBaseDomainEntity
         Employee = employee;
         Date = date.Date;
 
-        StartTimeUtc = (date.Date + startTimeUtc.TimeOfDay).RoundToNearestMinute(5);
-        EndTimeUtc = (date.Date + endTimeUtc.TimeOfDay).RoundToNearestMinute(5);
+        StartTimeUtc = SetTimeComponent(date, startTimeUtc.TimeOfDay);
+        EndTimeUtc = SetTimeComponent(date, endTimeUtc.TimeOfDay);
         RaiseDomainEvent(new ShiftCreatedDomainEvent(Id));
     }
 
@@ -76,6 +76,8 @@ public class Shift : JtBaseDomainEntity
         DateTime endTimeUtc)
     {
         ValidateShiftTimes(startTimeUtc, endTimeUtc);
+        StartTimeUtc = SetTimeComponent(date, startTimeUtc.TimeOfDay);
+        EndTimeUtc = SetTimeComponent(date, endTimeUtc.TimeOfDay);
 
         //Skipping because it causes errors when initializing the DB with past dates
         //this is not a real app, just a demo/test app
@@ -92,7 +94,11 @@ public class Shift : JtBaseDomainEntity
 
     private static void ValidateShiftTimes(DateTime startTimeUtc, DateTime endTimeUtc)
     {
-        if (startTimeUtc >= endTimeUtc)
+        // Allow end-of-day midnight as a valid end time regardless of start
+        if (endTimeUtc.TimeOfDay == TimeSpan.Zero)
+            return;
+
+        if (startTimeUtc.TimeOfDay >= endTimeUtc.TimeOfDay)
             throw new InvalidDomainDataException(nameof(Shift), "Start time must be earlier than end time.");
     }
 
@@ -102,6 +108,9 @@ public class Shift : JtBaseDomainEntity
         if (date < DateTime.Now)
             throw new InvalidDomainDataException(nameof(Shift), "Date must be in the future.");
     }
+
+    private static DateTime SetTimeComponent(DateTime date, TimeSpan time) =>
+        (date.Date + time).RoundToNearestMinute(5);
 
 
 

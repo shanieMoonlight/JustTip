@@ -4,5 +4,7 @@ public record EmployeeWeeklySummaryDto(
     Guid EmployeeId,
     string EmployeeName,
     double HoursWorked,
-    double TipShare
+    double TipShare,
+    DateTime RangeStartDate,
+    DateTime RangeEndDate
 );

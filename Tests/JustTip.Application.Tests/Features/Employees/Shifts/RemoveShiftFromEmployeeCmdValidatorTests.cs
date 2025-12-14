@@ -5,14 +5,12 @@ namespace JustTip.Application.Tests.Features.Employees.Shifts;
 public class RemoveShiftFromEmployeeCmdValidatorTests
 {
 
-    //--------------------------// 
-
     [Fact]
-    public void Validate_ShouldReturnValidationFailure_WhenDtoIsNull()
+    public void Validate_ShouldReturnValidationFailure_WhenEmployeeIdNull()
     {
         // Arrange
         var validator = new RemoveShiftFromEmployeeCmdValidator();
-        var command = new RemoveShiftFromEmployeeCmd(null!);
+        var command = new RemoveShiftFromEmployeeCmd(default, Guid.NewGuid());
 
         // Act
         var result = validator.Validate(command);
@@ -20,7 +18,24 @@ public class RemoveShiftFromEmployeeCmdValidatorTests
         // Assert
         result.IsValid.ShouldBeFalse();
         result.Errors.Count.ShouldBe(1);
-        result.Errors.First().ErrorMessage.ShouldBe(JustTipMsgs.Error.IsRequired(nameof(RemoveShiftFromEmployeeCmd.Dto)));
+    }
+
+
+    //--------------------------// 
+
+    [Fact]
+    public void Validate_ShouldReturnValidationFailure_WhenDtoIsNull()
+    {
+        // Arrange
+        var validator = new RemoveShiftFromEmployeeCmdValidator();
+        var command = new RemoveShiftFromEmployeeCmd(Guid.NewGuid(), default);
+
+        // Act
+        var result = validator.Validate(command);
+
+        // Assert
+        result.IsValid.ShouldBeFalse();
+        result.Errors.Count.ShouldBe(1);
     }
 
     //--------------------------// 
@@ -30,7 +45,7 @@ public class RemoveShiftFromEmployeeCmdValidatorTests
     {
         // Arrange
         var validator = new RemoveShiftFromEmployeeCmdValidator();
-        var command = new RemoveShiftFromEmployeeCmd(new RemoveShiftDto(default, default));
+        var command = new RemoveShiftFromEmployeeCmd(Guid.NewGuid(), Guid.NewGuid());
 
         // Act
         var result = validator.Validate(command);

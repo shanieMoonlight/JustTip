@@ -1,5 +1,4 @@
 using JustTip.Application.Features.Roster.Cmd.RemoveShift;
-using JustTip.Testing.Utils.DataFactories.Dtos;
 using static Jt.Application.Utility.Results.BasicResult;
 
 namespace JustTip.Application.Tests.Features.Employees.Shifts;
@@ -23,18 +22,19 @@ public class RemoveShiftFromEmployeeCmdHandlerTests
     public async Task Handle_ShouldReturnNotFound_WhenEmployeeDoesNotExist()
     {
         // Arrange
-        var dto = new RemoveShiftDto(Guid.NewGuid(), Guid.NewGuid());
+        var employeeId = Guid.NewGuid();
+        var shiftId = Guid.NewGuid();
         _mockRepo.Setup(repo => repo.FirstOrDefaultByIdWithShiftsAsync(It.IsAny<Guid?>()))
                  .ReturnsAsync((Employee?)null);
 
         // Act
-        var result = await _handler.Handle(new RemoveShiftFromEmployeeCmd(dto), CancellationToken.None);
+        var result = await _handler.Handle(new RemoveShiftFromEmployeeCmd(employeeId, shiftId), CancellationToken.None);
 
         // Assert
-        result.ShouldBeOfType<GenResult<EmployeeDto>>();
+        result.ShouldBeOfType<GenResult<RemovedResult>>();
         result.Succeeded.ShouldBeFalse();
         result.Status.ShouldBe(ResultStatus.NotFound);
-        result.Info.ShouldBe(JustTipMsgs.Error.NotFound<Employee>(dto.EmployeeId));
+        result.Info.ShouldBe(JustTipMsgs.Error.NotFound<Employee>(employeeId));
     }
 
     //--------------------------// 
@@ -54,17 +54,17 @@ public class RemoveShiftFromEmployeeCmdHandlerTests
         _mockRepo.Setup(repo => repo.FirstOrDefaultByIdWithShiftsAsync(It.Is<Guid?>(g => g == employee.Id)))
                  .ReturnsAsync(employee);
 
-        var dto = new RemoveShiftDto(employee.Id, shift.Id);
+        //var dto = new RemoveShiftDto(employee.Id, shift.Id);
 
         // Act
-        var result = await _handler.Handle(new RemoveShiftFromEmployeeCmd(dto), CancellationToken.None);
+        var result = await _handler.Handle(new RemoveShiftFromEmployeeCmd(employee.Id, shift.Id), CancellationToken.None);
 
         // Assert
-        result.ShouldBeOfType<GenResult<EmployeeDto>>();
+        result.ShouldBeOfType<GenResult<RemovedResult>>();
         result.Succeeded.ShouldBeTrue();
         result.Value.ShouldNotBeNull();
         // Ensure the returned DTO no longer contains the removed shift
-        result.Value!.Shifts.Any(s => s.Id == shift.Id).ShouldBeFalse();
+        result.Value!.Id.ShouldBe(shift.Id);
     }
 
     //--------------------------// 

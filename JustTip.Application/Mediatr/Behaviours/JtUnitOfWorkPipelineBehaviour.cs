@@ -1,7 +1,4 @@
-﻿using Jt.Application.Utility.Results;
-using JustTip.Application.Domain.Entities;
-using JustTip.Application.Mediatr.CQRS;
-using MediatR;
+﻿using JustTip.Application.Domain.Entities;
 
 namespace JustTip.Application.Mediatr.Behaviours;
 public sealed class JtUnitOfWorkPipelineBehaviour<TRequest, TResponse>(IJtUnitOfWork uow)

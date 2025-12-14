@@ -7,8 +7,10 @@ namespace JustTip.Application.Domain.Entities.Shifts;
 /// </summary>
 public interface IShiftRepo : IGenReadRepo<Shift>, IGenUpdateRepo<Shift>
 {
+    Task<Shift?> FirstOrDefaultByIdWithEmployeeAsync(Guid? id);
     Task<long> GetTotalSecondsAllInRangeAsync(DateTime startUtc, DateTime endUtc, CancellationToken cancellationToken);
     Task<long> GetTotalSecondsForEmployeeInRangeAsync(Guid employeeId, DateTime startUtc, DateTime endUtc, CancellationToken cancellationToken);
+    Task<IReadOnlyList<Shift>> ListAllFromByDateWithEmployeeAsync(DateTime start, CancellationToken cancellationToken);
     Task<IReadOnlyList<Shift>> ListByDateRangeWithEmployeeAsync(DateTime start, DateTime end, CancellationToken cancellationToken);
 }
 

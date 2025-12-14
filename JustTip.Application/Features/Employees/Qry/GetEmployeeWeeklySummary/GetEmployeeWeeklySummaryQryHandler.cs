@@ -1,5 +1,4 @@
 using JustTip.Application.LocalServices.AppServices;
-using JustTip.Application.LocalServices.Abs;
 
 namespace JustTip.Application.Features.Employees.Qry.GetEmployeeWeeklySummary;
 
@@ -31,7 +30,13 @@ public class GetEmployeeWeeklySummaryQryHandler(
         var totalTips = await tipRepo.GetTotalTipsAsync(weekStartUtc, weekEndUtc, cancellationToken);
 
         var calc = tipCalculator.Calculate(empSeconds, totalSeconds, totalTips);
-        var dto = new EmployeeWeeklySummaryDto(employee.Id, employee.Name, calc.Hours, (double)calc.TipShare);
+        var dto = new EmployeeWeeklySummaryDto(
+            employee.Id,
+            employee.Name,
+            calc.Hours,
+            (double)calc.TipShare,
+            rosterUtils.ToLocalTime(weekStartUtc),
+            rosterUtils.ToLocalTime(weekEndUtc));
         return GenResult<EmployeeWeeklySummaryDto>.Success(dto);
     }
 }

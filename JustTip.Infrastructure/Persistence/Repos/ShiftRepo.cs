@@ -7,6 +7,21 @@ namespace JustTip.Infrastructure.Persistence.Repos;
 internal class ShiftRepo(JtDbContext db) : AGenCrudRepo<Shift>(db), IShiftRepo
 {
 
+    /// <summary>
+    /// Get the entity with id, <paramref name="id"/> with related Employee included
+    /// </summary>
+    /// <param name="id">Entity identifier</param>
+    /// <returns></returns>
+    public async Task<Shift?> FirstOrDefaultByIdWithEmployeeAsync(Guid? id)
+    {
+        return await DbCtx.Shifts
+            .AsNoTracking()
+            .Include(e => e.Employee)
+            .FirstOrDefaultAsync(e => e.Id == id);
+    }
+
+    //----------------------//
+
     public async Task<IReadOnlyList<Shift>> ListByDateRangeWithEmployeeAsync(DateTime start, DateTime end, CancellationToken cancellationToken)
     {
         if (end < start)
@@ -15,6 +30,18 @@ internal class ShiftRepo(JtDbContext db) : AGenCrudRepo<Shift>(db), IShiftRepo
         return await DbCtx.Shifts
             .AsNoTracking()
             .Where(e => e.StartTimeUtc >= start && e.EndTimeUtc <= end)
+            .Include(e => e.Employee)
+            .ToListAsync(cancellationToken);
+    }
+
+    //----------------------//
+
+    public async Task<IReadOnlyList<Shift>> ListAllFromByDateWithEmployeeAsync(DateTime start,CancellationToken cancellationToken)
+    {
+        return await DbCtx.Shifts
+            .AsNoTracking()
+            .Where(e => e.StartTimeUtc >= start)
+            .OrderBy(s => s.StartTimeUtc)
             .Include(e => e.Employee)
             .ToListAsync(cancellationToken);
     }

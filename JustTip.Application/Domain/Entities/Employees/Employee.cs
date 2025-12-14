@@ -82,9 +82,6 @@ public class Employee : JtBaseDomainEntity
             return this;
 
         Shifts.Remove(existing);
-        // OPTIONAL: if you want to detach the relationship for EF state tracking:
-        // existing.Employee = null;
-        // existing.EmployeeId = Guid.Empty;    
 
         RaiseDomainEvent(new ShiftRemovedDomainEvent(Id, existing.Id));
         return this;

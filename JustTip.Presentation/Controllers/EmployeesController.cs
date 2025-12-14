@@ -5,7 +5,9 @@ using JustTip.Application.Features.Employees.Cmd.Update;
 using JustTip.Application.Features.Employees.Qry.GetAll;
 using JustTip.Application.Features.Employees.Qry.GetById;
 using JustTip.Application.Features.Employees.Qry.GetEmployeeWeeklySummary;
+using JustTip.Application.Features.Employees.Qry.GetEmployeeWeeklySummaryByWeek;
 using JustTip.Application.Features.Employees.Qry.GetFiltered;
+using JustTip.Application.Features.Employees.Qry.GetUpcomingShifts;
 using JustTip.Application.Features.Roster;
 using JustTip.Application.Features.Roster.Cmd.AddShift;
 using JustTip.Application.Features.Roster.Cmd.RemoveShift;
@@ -117,7 +119,7 @@ public class EmployeesController(ISender sender) : Controller
     /// after the shift has been added, or an appropriate error result.
     /// </returns>
     [HttpPost]
-    public async Task<ActionResult<EmployeeDto>> AddShift([FromBody] ShiftDto shift) =>
+    public async Task<ActionResult<EmployeeDto>> AddShift([FromBody] AddShiftDto shift) =>
         this.ProcessResult(await sender.Send(new AddShiftToEmployeeCmd(shift)));
 
     //--------------------------// 
@@ -130,18 +132,48 @@ public class EmployeesController(ISender sender) : Controller
     /// An <see cref="ActionResult{EmployeeDto}"/> containing the updated <see cref="EmployeeDto"/>
     /// after the shift removal, or an appropriate error result.
     /// </returns>
-    [HttpPost]
-    public async Task<ActionResult<EmployeeDto>> RemoveShift([FromBody] RemoveShiftDto shift) =>
-        this.ProcessResult(await sender.Send(new RemoveShiftFromEmployeeCmd(shift)));
+    [HttpDelete("{employeeId}/{shiftId}")]
+    public async Task<ActionResult<EmployeeDto>> RemoveShift([FromRoute] Guid employeeId, [FromRoute] Guid shiftId) =>
+        this.ProcessResult(await sender.Send(new RemoveShiftFromEmployeeCmd(employeeId, shiftId)));
 
 
     //--------------------------// 
 
+    [HttpGet("{employeeId}")]
+    public async Task<ActionResult<EmployeeDto>> GetUpcomingShifts([FromRoute] Guid employeeId) =>
+        this.ProcessResult(await sender.Send(new GetUpcomingShiftsQry(employeeId)));
+
+    //--------------------------// 
+
+    /// <summary>
+    /// Gets the weekly roster summary for the specified employee for the current week.
+    /// </summary>
+    /// <param name="id">The unique identifier of the employee whose weekly summary to retrieve.</param>
+    /// <returns>
+    /// An <see cref="ActionResult{RosterDto}"/> containing the employee's weekly roster summary,
+    /// or an appropriate error result (for example <c>NotFound</c> if the employee does not exist).
+    /// </returns>
     [HttpGet("{id}")]
-    public async Task<ActionResult<RosterDto>> GetEmployeeWeeklySummary(Guid id) =>
+    public async Task<ActionResult<EmployeeWeeklySummaryDto>> GetEmployeeWeeklySummary(Guid id) =>
         this.ProcessResult(await sender.Send(new GetEmployeeWeeklySummaryQry(id)));
 
-    ////--------------------------// 
+    //--------------------------// 
+    
+    /// <summary>
+    /// Gets the weekly roster summary for the specified employee for a specific week.
+    /// </summary>
+    /// <param name="id">The unique identifier of the employee whose weekly summary to retrieve.</param>
+    /// <param name="weekNumber">
+    /// Optional week number to retrieve. If <c>null</c>, the current week will be used.
+    /// The interpretation of week numbers follows the application's configured week indexing (typically ISO week).
+    /// </param>
+    /// <returns>
+    /// An <see cref="ActionResult{RosterDto}"/> containing the employee's roster summary for the requested week,
+    /// or an appropriate error result (for example <c>NotFound</c>).
+    /// </returns>
+    [HttpGet("{id}/{weekNumber?}")]
+    public async Task<ActionResult<EmployeeWeeklySummaryDto>> GetEmployeeWeeklySummaryByWeek(Guid id, int? weekNumber) =>
+        this.ProcessResult(await sender.Send(new GetEmployeeWeeklySummaryByWeekQry(id, weekNumber)));
 
     ///// <summary>
     ///// Gets a paginated list of Employees

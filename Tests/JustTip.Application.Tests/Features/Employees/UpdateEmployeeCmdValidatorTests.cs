@@ -29,7 +29,7 @@ public class UpdateEmployeeCmdValidatorTests
     {
         // Arrange
         var validator = new UpdateEmployeeCmdValidator();
-        var command = new UpdateEmployeeCmd(default(Guid), new EmployeeDto());
+        var command = new UpdateEmployeeCmd(default, new EmployeeDto());
 
         // Act
         var result = validator.Validate(command);

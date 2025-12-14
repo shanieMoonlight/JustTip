@@ -1,20 +1,17 @@
-using JustTip.Application.Features.Roster;
-using JustTip.Application.Features.Roster.Cmd.AddShift;
-using JustTip.Application.Features.Roster.Cmd.UpdateShift;
+using JustTip.Application.Features.Employees.Qry.GetUpcomingShifts;
+using JustTip.Application.Features.Roster.Cmd.RemoveShift;
 
 namespace JustTip.Application.Tests.Features.Employees.Shifts;
 
-public class AddShiftToEmployeeCmdValidatorTests
+public class GetUpcomingShiftsQryValidatorTests
 {
-
-    //--------------------------// 
 
     [Fact]
     public void Validate_ShouldReturnValidationFailure_WhenDtoIsNull()
     {
         // Arrange
-        var validator = new AddShiftToEmployeeCmdValidator();
-        var command = new AddShiftToEmployeeCmd(null!);
+        var validator = new GetUpcomingShiftsQryValidator();
+        var command = new GetUpcomingShiftsQry(default);
 
         // Act
         var result = validator.Validate(command);
@@ -22,7 +19,9 @@ public class AddShiftToEmployeeCmdValidatorTests
         // Assert
         result.IsValid.ShouldBeFalse();
         result.Errors.Count.ShouldBe(1);
-        result.Errors.First().ErrorMessage.ShouldBe(JustTipMsgs.Error.IsRequired(nameof(AddShiftToEmployeeCmd.Dto)));
+        result.Errors.First().ErrorMessage
+            .Replace(" ", "")
+            .ShouldBe(JustTipMsgs.Error.IsRequired(nameof(GetUpcomingShiftsQry.EmployeeId)).Replace(" ", ""));
     }
 
     //--------------------------// 
@@ -31,9 +30,8 @@ public class AddShiftToEmployeeCmdValidatorTests
     public void Validate_ShouldReturnValidationSuccess_WhenDtoIsNotNull()
     {
         // Arrange
-        var validator = new AddShiftToEmployeeCmdValidator();
-        var command = new AddShiftToEmployeeCmd(new AddShiftDto());
-
+        var validator = new GetUpcomingShiftsQryValidator();
+        var command = new GetUpcomingShiftsQry(Guid.NewGuid());
         // Act
         var result = validator.Validate(command);
 
