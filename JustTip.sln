@@ -31,6 +31,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LogToFile", "Libs\LogToFile
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestingHelpers", "Libs\TestingHelpers\TestingHelpers.csproj", "{4086A10E-3AEE-956A-B3B7-B36FFFFAB7CA}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PrerenderedSpa", "Libs\SpaHelpers\PrerenderedSpa\PrerenderedSpa.csproj", "{38C7BE59-2AA0-9176-05A9-FBA2B84EAB90}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -69,6 +71,10 @@ Global
 		{4086A10E-3AEE-956A-B3B7-B36FFFFAB7CA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4086A10E-3AEE-956A-B3B7-B36FFFFAB7CA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4086A10E-3AEE-956A-B3B7-B36FFFFAB7CA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{38C7BE59-2AA0-9176-05A9-FBA2B84EAB90}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{38C7BE59-2AA0-9176-05A9-FBA2B84EAB90}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{38C7BE59-2AA0-9176-05A9-FBA2B84EAB90}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{38C7BE59-2AA0-9176-05A9-FBA2B84EAB90}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -83,6 +89,7 @@ Global
 		{20D41098-D6E2-4F77-B241-D18EE26642E1} = {115E4A0A-33F6-404C-83D7-EF164D77E423}
 		{1C836B5F-8D91-1948-6F90-17CFEA4DE85A} = {00E35FCE-D929-4941-B94A-88E16C80B5A7}
 		{4086A10E-3AEE-956A-B3B7-B36FFFFAB7CA} = {00E35FCE-D929-4941-B94A-88E16C80B5A7}
+		{38C7BE59-2AA0-9176-05A9-FBA2B84EAB90} = {00E35FCE-D929-4941-B94A-88E16C80B5A7}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {F304B3C8-1FA1-4CB7-8F3D-D23875D3DE94}

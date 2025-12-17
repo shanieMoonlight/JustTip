@@ -4,6 +4,7 @@ using JustTip.API.Middleware.Exceptions;
 using JustTip.API.Setup;
 using JustTip.Application;
 using JustTip.Infrastructure;
+using PrerenderedSpa.PrerenderedBuilder;
 using Scalar.AspNetCore;
 
 var _builder = WebApplication.CreateBuilder(args);
@@ -78,6 +79,12 @@ app.UseAuthorization();
 app.MapControllers();
 
 
+
+app.UsePrerenderedSpa(new PrerenderedSpaOptions
+{
+    SourcePath = _startupData.SPA_STATIC_FILES_PATH,
+    FallbackToNearestParentDirectory = true
+});
 
 await app.UseJtApplicationAsync();
 app.UseJtInfrastructure("jt-job-dashboard");

@@ -7,7 +7,10 @@ internal class GetAllTipsQryHandler(ITipRepo repo) : IJtQueryHandler<GetAllTipsQ
     public async Task<GenResult<IEnumerable<TipDto>>> Handle(GetAllTipsQry request, CancellationToken cancellationToken)
     {
         var mdls = await repo.ListAllAsync();
-        var dtos = mdls.Select(mdl => mdl.ToDto());
+        var dtos = mdls
+            .OrderByDescending(t => t.DateTime)
+            .Select(mdl => mdl.ToDto())
+            ;
         return GenResult<IEnumerable<TipDto>>.Success(dtos);
 
     }

@@ -34,6 +34,7 @@
 		<ProjectReference Include="..\JustTip.Infrastructure\JustTip.Infrastructure.csproj" />
 		<ProjectReference Include="..\JustTip.Presentation\JustTip.Presentation.csproj" />
 		<ProjectReference Include="..\Libs\LogToFile\LogToFile.csproj" />
+		<ProjectReference Include="..\Libs\SpaHelpers\PrerenderedSpa\PrerenderedSpa.csproj" />
 	</ItemGroup>
 
 

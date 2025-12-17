@@ -18,7 +18,9 @@ public class GetAllTipsByWeekQryHandler(ITipRepo tipRepo)
 
         var tips = await tipRepo.ListByDateRangeAsync(targetWeekStart, targetWeekEnd, cancellationToken);
 
-        var dtos = tips.Select(t => new TipDto(t)).ToList();
+        var dtos = tips
+            .OrderByDescending(t => t.DateTime)
+            .Select(t => new TipDto(t)).ToList();
         return GenResult<List<TipDto>>.Success(dtos);
     }
 
