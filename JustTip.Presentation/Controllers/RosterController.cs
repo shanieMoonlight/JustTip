@@ -2,7 +2,7 @@
 using JustTip.Application.Features.Roster.Cmd.UpdateShift;
 using JustTip.Application.Features.Roster.Qry.GetCurrentWeekRoster;
 using JustTip.Application.Features.Roster.Qry.GetRosterByWeek;
-using JustTip.Application.Features.Roster.Qry.GetShift.GetById;
+using JustTip.Application.Features.Roster.Qry.GetShiftById;
 using JustTip.Application.Features.Roster.Qry.GetUpcomingWeekRoster;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;

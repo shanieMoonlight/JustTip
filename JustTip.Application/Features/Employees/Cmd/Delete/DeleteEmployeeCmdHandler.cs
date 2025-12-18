@@ -8,7 +8,7 @@ public class DeleteEmployeeCmdHandler(IEmployeeRepo _repo ) : IJtCommandHandler<
 
         await _repo.DeleteAsync(id);
         var result = new DeletedResult(id);
-        return GenResult<DeletedResult>.Success((result));
+        return GenResult<DeletedResult>.Success(result);
 
     }
 

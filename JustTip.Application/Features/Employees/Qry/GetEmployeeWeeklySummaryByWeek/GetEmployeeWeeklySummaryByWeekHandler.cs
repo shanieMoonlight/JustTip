@@ -1,5 +1,5 @@
-using Jt.Application.Utility.Results;
 using JustTip.Application.LocalServices.AppServices;
+using System.Diagnostics;
 
 namespace JustTip.Application.Features.Employees.Qry.GetEmployeeWeeklySummaryByWeek;
 
@@ -16,9 +16,10 @@ public class GetEmployeeWeeklySummaryByWeekHandler(
         //We are always looking for previous or current weeks
         int weekNumber = Math.Abs(request.WeekNumber ?? 0);
 
+
         var now = DateTime.UtcNow;
-        var thisWeekStart = rosterUtils.GetMostRecentMonday(now);
-        var targetWeekStart = thisWeekStart.AddDays(-7 * weekNumber);
+        var mostRecentMonday = rosterUtils.GetMostRecentMonday(now);
+        var targetWeekStart = mostRecentMonday.AddDays(-7 * weekNumber);
         var targetWeekEnd = targetWeekStart.AddDays(7);
 
         var employee = await employeeRepo.FirstOrDefaultByIdWithShiftsAsync(request.EmployeeId);
@@ -28,6 +29,7 @@ public class GetEmployeeWeeklySummaryByWeekHandler(
         var empSeconds = await shiftRepo.GetTotalSecondsForEmployeeInRangeAsync(request.EmployeeId, targetWeekStart, targetWeekEnd, cancellationToken);
         var totalSeconds = await shiftRepo.GetTotalSecondsAllInRangeAsync(targetWeekStart, targetWeekEnd, cancellationToken);
         var totalTips = await tipRepo.GetTotalTipsAsync(targetWeekStart, targetWeekEnd, cancellationToken);
+
 
         var calc = tipCalculator.Calculate(empSeconds, totalSeconds, totalTips);
         var dto = new EmployeeWeeklySummaryDto(

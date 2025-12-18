@@ -22,8 +22,12 @@ internal class DbInitializer(JtDbContext _db) : IDbInitializer
 
     //-----------------------------//
 
-    public async Task MigrateAsync() => 
-        await _db.Database
-            .MigrateAsync();
+    public async Task MigrateAsync()
+    {
+        if (_db.Database.IsSqlite())
+            await _db.Database.EnsureCreatedAsync();
+        else
+            await _db.Database.MigrateAsync();
+    }
 
 }//Cls

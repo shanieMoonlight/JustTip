@@ -15,10 +15,7 @@ WORKDIR /src
 COPY ["Directory.Packages.props", "."]
 COPY ["JustTip.API/JustTip.API.csproj", "JustTip.API/"]
 COPY ["JustTip.Application/JustTip.Application.csproj", "JustTip.Application/"]
-COPY ["JustTip.Infrastructure/JustTip.Infrastructure.csproj", "JustTip.Infrastructure/"]
-COPY ["JustTip.Presentation/JustTip.Presentation.csproj", "JustTip.Presentation/"]
-COPY ["Libs/LogToFile/LogToFile.csproj", "Libs/LogToFile/"]
-COPY ["Libs/SpaHelpers/PrerenderedSpa/PrerenderedSpa.csproj", "Libs/SpaHelpers/PrerenderedSpa/"]
+COPY ["Libs/LogToFile.csproj", "Libs/"]
 RUN dotnet restore "./JustTip.API/JustTip.API.csproj"
 COPY . .
 WORKDIR "/src/JustTip.API"

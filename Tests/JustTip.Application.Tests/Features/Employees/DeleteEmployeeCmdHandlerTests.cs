@@ -29,9 +29,9 @@ public class DeleteEmployeeCmdHandlerTests
         var result = await _handler.Handle(new DeleteEmployeeCmd(Id), CancellationToken.None);
 
         // Assert
-        result.ShouldBeOfType<BasicResult>();
+        result.ShouldBeOfType<GenResult<DeletedResult>>();
         result.Succeeded.ShouldBeTrue();
-        result.Info.ShouldBe(JustTipMsgs.Info.Deleted<Employee>(Id));
+        result.Value.ShouldBe(new DeletedResult(Id));
 }
 
     //--------------------------// 

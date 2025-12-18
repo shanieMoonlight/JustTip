@@ -5,6 +5,7 @@
 		<Nullable>enable</Nullable>
 		<ImplicitUsings>enable</ImplicitUsings>
 		<DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+		<UserSecretsId>7bda357f-f5e3-4206-8162-2de491279360</UserSecretsId>
 	</PropertyGroup>
 
 	<ItemGroup>
@@ -27,6 +28,11 @@
 		<AdditionalFiles Include="appsettings.json" />
 	</ItemGroup>
 
+	<ItemGroup>
+		<Content Include="ClientApp\dist\**\*">
+			<CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+		</Content>
+	</ItemGroup>
 
 
 	<ItemGroup>

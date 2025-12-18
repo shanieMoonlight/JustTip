@@ -41,6 +41,5 @@ public class CreateEmployeeCmdHandlerTests
         result.Value!.Description.ShouldBeEquivalentTo(requestDto.Description);
     }
 
-    //--------------------------// 
 
 }//Cls

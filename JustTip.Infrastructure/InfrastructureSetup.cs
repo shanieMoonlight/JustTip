@@ -14,7 +14,8 @@ public static class InfrastructureSetup
         string connectionString)
     {
         services
-            .AddPersistenceEf(connectionString)
+            //.AddPersistenceEf_PG(connectionString)
+            .AddPersistenceEf_SqlLite()
             .AddApplicationImplementations()
             .SetupJobServices(connectionString);
 

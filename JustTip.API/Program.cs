@@ -79,6 +79,9 @@ app.UseAuthorization();
 app.MapControllers();
 
 
+await app.UseJtApplicationAsync();
+app.UseJtInfrastructure("jt-job-dashboard");
+
 
 app.UsePrerenderedSpa(new PrerenderedSpaOptions
 {
@@ -86,7 +89,5 @@ app.UsePrerenderedSpa(new PrerenderedSpaOptions
     FallbackToNearestParentDirectory = true
 });
 
-await app.UseJtApplicationAsync();
-app.UseJtInfrastructure("jt-job-dashboard");
 
 app.Run();
